@@ -241,7 +241,7 @@ h6 {
 }
 
 .scrolled .header .branding .navmenu ul li a{
-  color: black;
+  color:black;
   /* background-color: #175cdd; */
   /* padding: 5px 10px; */
 }
@@ -250,6 +250,21 @@ h6 {
   border: none;
   padding: 5px 20px;
   border: 1px solid rgba(0, 0, 0, 0.275);
+  transition: 0.1s ease-in;
+}
+.header .branding .navmenu ul li button:hover{
+  background-color: var(--nav-hover-color);
+  color: white;
+  transition: 0.1s ease-in;
+  border: none;
+  padding: 5px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.275);
+}
+.header .branding .navmenu ul li button{
+  color: black;
+}
+.header .branding .navmenu ul li button a:hover{
+  color: white;
 }
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -348,14 +363,14 @@ h6 {
   }
 
   .navmenu .dropdown ul li {
-    min-width: 200px;
+    min-width: 100px;
   }
 
   .navmenu .dropdown ul a {
     padding: 10px 20px;
     font-size: 15px;
     text-transform: none;
-    color: var(--text-color);
+    color: black;
   }
 
   .navmenu .dropdown ul a i {
@@ -365,7 +380,7 @@ h6 {
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
-    color: var(--text-color);
+    color:black;
   }
 
   .navmenu .dropdown:hover>ul {

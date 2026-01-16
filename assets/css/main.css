@@ -248,6 +248,7 @@ h6 {
 .header .branding .navmenu ul li button{
   background-color: white;
   border: none;
+  color: black;
   padding: 5px 20px;
   border: 1px solid rgba(0, 0, 0, 0.275);
   transition: 0.1s ease-in;
@@ -260,11 +261,14 @@ h6 {
   padding: 5px 20px;
   border: 1px solid rgba(0, 0, 0, 0.275);
 }
-.header .branding .navmenu ul li button{
+.header .branding .navmenu ul li button a{
   color: black;
 }
 .header .branding .navmenu ul li button a:hover{
   color: white;
+}
+.branding{
+  background-color: var(--background-color);
 }
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -417,8 +421,8 @@ h6 {
   .navmenu {
     padding: 0;
     z-index: 9997;
-    background-color: var(--nav-dropdown-background-color);
-    opacity: 1;
+    background-color: var(--background-color);
+    opacity: 0.5;
   }
 
   .navmenu ul {

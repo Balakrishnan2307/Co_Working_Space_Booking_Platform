@@ -37,6 +37,7 @@
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #3c4049; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #175cdd; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --text-color:var(--heading-color);
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -47,6 +48,7 @@
 }
 
 .dark-background {
+  --text-color:#ffff;
   --background-color: #021418;
   --default-color: #ffffff;
   --heading-color: #ffffff;
@@ -191,7 +193,7 @@ h6 {
 }
 
 .header .topbar .social-links a {
-  color: color-mix(in srgb, var(--contrast-color), transparent 40%);
+  color: color-mix(in srgb, var(--contrast-color), transparent 100%);
   line-height: 0;
   transition: 0.3s;
   margin-left: 20px;
@@ -204,6 +206,7 @@ h6 {
 .header .branding {
   min-height: 60px;
   padding: 10px 0;
+  background-color: var(--background-color);
 }
 
 .header .logo {
@@ -232,8 +235,21 @@ h6 {
 ------------------------------*/
 .scrolled .header {
   --background-color: #ffffff;
+  --top-text-color:var(--heading-color);
+
 }
 
+.scrolled .header .branding .navmenu ul li a{
+  color: black;
+  /* background-color: #175cdd; */
+  /* padding: 5px 10px; */
+}
+.header .branding .navmenu ul li button{
+  background-color: white;
+  border: none;
+  padding: 5px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.275);
+}
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -241,6 +257,7 @@ h6 {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
+    background-color: var(--background-color);
   }
 
   .navmenu ul {
@@ -266,7 +283,7 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: var(--text-color);
     font-size: 15px;
     padding: 0 2px;
     font-family: var(--nav-font);
@@ -337,7 +354,7 @@ h6 {
     padding: 10px 20px;
     font-size: 15px;
     text-transform: none;
-    color: var(--nav-dropdown-color);
+    color: var(--text-color);
   }
 
   .navmenu .dropdown ul a i {
@@ -347,7 +364,7 @@ h6 {
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
-    color: var(--nav-dropdown-hover-color);
+    color: var(--text-color);
   }
 
   .navmenu .dropdown:hover>ul {
@@ -384,6 +401,8 @@ h6 {
   .navmenu {
     padding: 0;
     z-index: 9997;
+    background-color: var(--nav-dropdown-background-color);
+    opacity: 1;
   }
 
   .navmenu ul {
@@ -394,17 +413,18 @@ h6 {
     padding: 10px 0;
     margin: 0;
     border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
+    background-color: var(--background-color);
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
     box-shadow: none;
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
   }
+  
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
+    /* color: var(--nav-dropdown-color); */
     padding: 10px 20px;
     font-family: var(--nav-font);
     font-size: 17px;
@@ -851,6 +871,7 @@ h6 {
   bottom: -15px;
   z-index: 99999;
   background-color: var(--accent-color);
+  color: var();
   width: 44px;
   height: 44px;
   border-radius: 50px;

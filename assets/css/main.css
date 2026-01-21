@@ -245,12 +245,15 @@ h6 {
   /* background-color: #175cdd; */
   /* padding: 5px 10px; */
 }
+.branding .navbar{
+  background-color: white;
+}
 .header .branding .navmenu ul li button{
   background-color: white;
   border: none;
-  color: black;
+  color: #175cdd;
   padding: 5px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.275);
+  border: 1px solid #175cdd;
   transition: 0.1s ease-in;
 }
 .header .branding .navmenu ul li button:hover{
@@ -259,10 +262,18 @@ h6 {
   transition: 0.1s ease-in;
   border: none;
   padding: 5px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.275);
+  border: 1px solid rgba(0, 0, 0, 0.138);
 }
-.header .branding .navmenu ul li button a{
-  color: black;
+.header .branding .navmenu .navmenu-link .button{
+  color: white ;
+  background-color:#175cdd;
+  padding: 5px 10px;
+}
+.header .branding .navmenu .navmenu-link .button:hover{
+  color:#175cdd;
+  background-color:white;
+  padding: 5px 10px;
+  border: 1px solid #175cdd;
 }
 .header .branding .navmenu ul li button a:hover{
   color: white;

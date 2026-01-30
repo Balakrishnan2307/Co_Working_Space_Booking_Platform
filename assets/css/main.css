@@ -14,30 +14,42 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Montserrat",  sans-serif;
-  --nav-font: "Lato",  sans-serif;
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Montserrat", sans-serif;
+  --nav-font: "Lato", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #3c4049; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #112344; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #175cdd; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #3c4049;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #112344;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #175cdd;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #3c4049;  /* The default color of the main navmenu links */
-  --nav-hover-color: #175cdd; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #3c4049; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #175cdd; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
-  --text-color:#000;
+  --nav-color: #3c4049;
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #175cdd;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #3c4049;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #175cdd;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --text-color: #000;
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -48,8 +60,8 @@
 }
 
 .dark-background {
-  --text-color:#ffff;
-  --heading-color:#112344;
+  --text-color: #ffff;
+  --heading-color: #112344;
   --background-color: #021418;
   --default-color: #ffffff;
   --heading-color: #ffffff;
@@ -236,19 +248,27 @@ h6 {
 ------------------------------*/
 .scrolled .header {
   --background-color: #ffffff;
-  --top-text-color:var(--heading-color);
+  --top-text-color: var(--heading-color);
 
 }
 
-.scrolled .header .branding .navmenu ul li a{
-  color:black;
+.scrolled .header .branding {
+  color: black;
+  background-color: white;
+  /* padding: 5px 10px; */
+}
+
+.scrolled .header .branding .navmenu ul li a {
+  color: black;
   /* background-color: #175cdd; */
   /* padding: 5px 10px; */
 }
-.branding .navbar{
+
+.branding .navbar {
   background-color: white;
 }
-.header .branding .navmenu ul li button{
+
+.header .branding .navmenu ul li button {
   background-color: white;
   border: none;
   color: #175cdd;
@@ -256,7 +276,8 @@ h6 {
   border: 1px solid #175cdd;
   transition: 0.1s ease-in;
 }
-.header .branding .navmenu ul li button:hover{
+
+.header .branding .navmenu ul li button:hover {
   background-color: var(--nav-hover-color);
   color: white;
   transition: 0.1s ease-in;
@@ -264,23 +285,28 @@ h6 {
   padding: 5px 20px;
   border: 1px solid rgba(0, 0, 0, 0.138);
 }
-.header .branding .navmenu .navmenu-link .button{
-  color: white ;
-  background-color:#175cdd;
+
+.header .branding .navmenu .navmenu-link .button {
+  color: white;
+  background-color: #175cdd;
   padding: 5px 10px;
 }
-.header .branding .navmenu .navmenu-link .button:hover{
-  color:#175cdd;
-  background-color:white;
+
+.header .branding .navmenu .navmenu-link .button:hover {
+  color: #175cdd;
+  background-color: white;
   padding: 5px 10px;
   border: 1px solid #175cdd;
 }
-.header .branding .navmenu ul li button a:hover{
+
+.header .branding .navmenu ul li button a:hover {
   color: white;
 }
-.branding{
+
+.branding {
   background-color: var(--background-color);
 }
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -295,10 +321,12 @@ h6 {
     margin: 0;
     padding: 0;
     display: flex;
-    list-style: none;;
+    list-style: none;
+    ;
     align-items: center;
   }
-  .bg{
+
+  .bg {
     background-color: var(--background-color);
   }
 
@@ -398,7 +426,7 @@ h6 {
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
-    color:black;
+    color: black;
   }
 
   .navmenu .dropdown:hover>ul {
@@ -432,6 +460,12 @@ h6 {
     transition: color 0.3s;
   }
 
+  .scrolled .header .branding {
+    color: black;
+    background-color: white;
+    /* padding: 5px 10px; */
+  }
+
   .navmenu {
     padding: 0;
     z-index: 9997;
@@ -454,7 +488,7 @@ h6 {
     transition: 0.3s;
     z-index: 9998;
   }
-  
+
 
   .navmenu a,
   .navmenu a:focus {
@@ -548,7 +582,15 @@ h6 {
   .mobile-nav-active .navmenu>ul {
     display: block;
   }
+
+  .scrolled .header .branding {
+    color: black;
+    background-color: white;
+    /* padding: 5px 10px; */
+  }
 }
+
+
 
 /*--------------------------------------------------------------
 # Global Footer
@@ -2167,7 +2209,9 @@ section,
 }
 
 .featured-services .service-item {
-  padding: 32px 0;
+  /* padding: 32px 0; */
+  padding-bottom: 35px;
+  padding-right: 30px;
   border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
   display: flex;
   gap: 20px;
@@ -2350,14 +2394,14 @@ section,
 --------------------------------------------------------------*/
 .find-a-doctor .search-section {
   max-width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .find-a-doctor .search-section .search-title {
   font-size: 2.5rem;
   font-weight: 300;
   color: var(--heading-color);
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -2365,7 +2409,7 @@ section,
 .find-a-doctor .search-section .search-subtitle {
   font-size: 1.125rem;
   color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
   line-height: 1.6;
   font-weight: 300;
 }
@@ -2452,7 +2496,7 @@ section,
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2.5rem;
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
 }
 
 .find-a-doctor .doctor-profile {

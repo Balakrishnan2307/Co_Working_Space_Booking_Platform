@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co_Working_Space_Booking_Platform</title>
+    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* --- CSS Variables & Theme Setup --- */
+        :root {
+            --bg-body: #f3f4f6;
+            --bg-sidebar: #ffffff;
+            --bg-card: #ffffff;
+            --bg-hover: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #e0e7ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --sidebar-width: 260px;
+            --header-height: 70px;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #111827;
+            --bg-sidebar: #1f2937;
+            --bg-card: #1f2937;
+            --bg-hover: #374151;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --primary: #6366f1;
+            --primary-hover: #818cf8;
+            --primary-light: #312e81;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Global Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- Layout --- */
+        .app-container {
+            display: flex;
+            height: 100%;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .brand {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 20px 16px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: var(--radius);
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            font-size: 1.25rem;
+        }
+
+        .nav-item:hover {
+            background-color: var(--bg-hover);
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            height: var(--header-height);
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            transition: var(--transition);
+        }
+
+        .header-left h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-hover);
+            color: var(--primary);
+        }
+
+        .profile-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .profile-role {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 180px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: none;
+            flex-direction: column;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .dropdown.show {
+            display: flex;
+        }
+
+        .dropdown-item {
+            padding: 10px 20px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-hover);
+            color: var(--danger);
+        }
+
+        .content-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        .section-container {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Grids & Components --- */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* Inputs */
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-body);
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        /* --- Specific Component Styles --- */
+
+        /* Quick Actions */
+        .action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-body);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .action-card:hover {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .action-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Floor Plan */
+        .floor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 12px;
+        }
+
+        .desk-spot {
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .desk-spot.free {
+            background-color: var(--success);
+            opacity: 0.3;
+        }
+
+        .desk-spot.busy {
+            background-color: var(--danger);
+            opacity: 0.3;
+        }
+
+        .desk-spot.my-desk {
+            background-color: var(--primary);
+            border: 2px solid var(--text-main);
+        }
+
+        /* Ticket Card */
+        .ticket-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 15px;
+            background: var(--bg-card);
+        }
+
+        .ticket-main {
+            padding: 20px;
+            flex: 1;
+            border-right: 2px dashed var(--border-color);
+            position: relative;
+        }
+
+        .ticket-main::after,
+        .ticket-main::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-body);
+            border-radius: 50%;
+            right: -10px;
+        }
+
+        .ticket-main::before {
+            top: -10px;
+        }
+
+        .ticket-main::after {
+            bottom: -10px;
+        }
+
+        .ticket-side {
+            padding: 20px;
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-hover);
+        }
+
+        /* Feed Post */
+        .feed-post {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .feed-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-a {
+            margin-top: 10px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .faq-item.active .faq-a {
+            display: block;
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+            min-width: 250px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                left: -100%;
+                height: 100%;
+                box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                margin-right: 16px;
+            }
+
+            .grid-3,
+            .grid-2,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-card {
+                flex-direction: column;
+            }
+
+            .ticket-main {
+                border-right: none;
+                border-bottom: 2px dashed var(--border-color);
+            }
+
+            .ticket-side {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .ticket-main::after,
+            .ticket-main::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="brand">
+                <a href="home.html"><img src="Dashboard/assets/images/logo.png" width="150px" alt=""></a>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-item active" onclick="switchTab('dashboard', this)"><i
+                        class="ph ph-squares-four"></i> Dashboard</a>
+                <a href="#" class="nav-item" onclick="switchTab('bookings', this)"><i class="ph ph-calendar-check"></i>
+                    My Bookings</a>
+                <a href="#" class="nav-item" onclick="switchTab('management', this)"><i
+                        class="ph ph-sliders-horizontal"></i> Booking Mgmt</a>
+                <a href="#" class="nav-item" onclick="switchTab('customers', this)"><i class="ph ph-users"></i>
+                    Customers</a>
+                <a href="#" class="nav-item" onclick="switchTab('payments', this)"><i class="ph ph-credit-card"></i>
+                    Payments</a>
+                <a href="#" class="nav-item" onclick="switchTab('community', this)"><i class="ph ph-users-three"></i>
+                    Community</a>
+                <a href="#" class="nav-item" onclick="switchTab('promotions', this)"><i class="ph ph-tag"></i>
+                    Promotions</a>
+                <a href="#" class="nav-item" onclick="switchTab('support', this)"><i class="ph ph-life-buoy"></i>
+                    Support</a>
+                <a href="#" class="nav-item" onclick="switchTab('security', this)"><i class="ph ph-shield-check"></i>
+                    Security</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <button class="mobile-menu-btn" onclick="toggleSidebar()"><i class="ph ph-list"></i></button>
+
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                        <i class="ph ph-moon" id="theme-icon"></i>
+                    </button>
+                    <div class="profile-menu" onclick="toggleDropdown()">
+                        <img src="https://picsum.photos/seed/user1/200/200.jpg" alt="User" class="avatar">
+                        <div class="profile-info">
+                            <span class="profile-name">Alex Morgan</span>
+                            <span class="profile-role">Premium Member</span>
+                        </div>
+                        <i class="ph ph-caret-down"></i>
+                        <div class="dropdown" id="profileDropdown">
+                            <a href="#" class="dropdown-item" onclick="showToast('Settings Opened')"><i
+                                    class="ph ph-user-gear"></i> Settings</a>
+                            <a href="#" class="dropdown-item" onclick="logout()"><i class="ph ph-sign-out"></i>
+                                Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- 1. DASHBOARD -->
+                <section id="dashboard" class="section-container active">
+                    <div class="grid-3">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Total Bookings</span><i
+                                    class="ph ph-calendar-blank" style="color:var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h1>24</h1>
+                            <p style="color:var(--text-muted); font-size:0.9rem;">+4 from last month</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Upcoming Events</span><i
+                                    class="ph ph-calendar-star" style="color:var(--warning); font-size: 1.5rem;"></i>
+                            </div>
+                            <h1>3</h1>
+                            <p style="color:var(--text-muted); font-size:0.9rem;">Next: Tech Talk Friday</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Wallet Balance</span><i
+                                    class="ph ph-wallet" style="color:var(--success); font-size: 1.5rem;"></i></div>
+                            <h1>$450.00</h1>
+                            <p style="color:var(--text-muted); font-size:0.9rem;">Auto-pay enabled</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header"><span class="card-title">Quick Actions</span></div>
+                        <div class="grid-4">
+                            <div class="action-card" onclick="showToast('Opening Desk Booking...')"><i
+                                    class="ph ph-desk"></i><span>Book Desk</span></div>
+                            <div class="action-card" onclick="showToast('Opening Room Booking...')"><i
+                                    class="ph ph-door"></i><span>Book Room</span></div>
+                            <div class="action-card" onclick="showToast('Invite Modal Opened')"><i
+                                    class="ph ph-user-plus"></i><span>Invite Guest</span></div>
+                            <div class="action-card" onclick="showToast('Scanning QR Code...')"><i
+                                    class="ph ph-qr-code"></i><span>Check In</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Live Floor Plan</span><span
+                                    style="font-size:0.8rem; color:var(--text-muted);">Floor 2</span></div>
+                            <div class="floor-grid">
+                                <div class="desk-spot busy" title="Occupied"></div>
+                                <div class="desk-spot free" onclick="showToast('Desk Selected')"></div>
+                                <div class="desk-spot free" onclick="showToast('Desk Selected')"></div>
+                                <div class="desk-spot my-desk" title="You"></div>
+                                <div class="desk-spot busy"></div>
+                                <div class="desk-spot free" onclick="showToast('Desk Selected')"></div>
+                                <div class="desk-spot busy"></div>
+                                <div class="desk-spot free" onclick="showToast('Desk Selected')"></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Recent Activity</span></div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Hot Desk A4</td>
+                                        <td>Oct 24</td>
+                                        <td><span class="status-badge status-active">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Meeting Room 2</td>
+                                        <td>Oct 26</td>
+                                        <td><span class="status-badge status-pending">Confirmed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. MY BOOKINGS -->
+                <section id="bookings" class="section-container">
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:5px;">
+                            <button class="btn btn-primary" onclick="showToast('Filter: All')">All Bookings</button>
+                            <button class="btn btn-outline" onclick="showToast('Filter: Upcoming')">Upcoming</button>
+                            <button class="btn btn-outline" onclick="showToast('Filter: Past')">History</button>
+                            <button class="btn btn-outline" onclick="showToast('Filter: Cancelled')">Cancelled</button>
+                        </div>
+                    </div>
+
+                    <!-- Ticket Style Card -->
+                    <div class="ticket-card">
+                        <div class="ticket-main">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <h3>Private Office 102</h3>
+                                <span class="status-badge status-active">Confirmed</span>
+                            </div>
+                            <p style="color:var(--text-muted); margin-bottom:5px;"><i class="ph ph-calendar"></i> Oct
+                                28, 2023</p>
+                            <p style="color:var(--text-muted); margin-bottom:15px;"><i class="ph ph-clock"></i> 09:00 AM
+                                - 05:00 PM (8 Hours)</p>
+                            <div
+                                style="font-size:0.85rem; background:var(--bg-hover); padding:10px; border-radius:6px;">
+                                <i class="ph ph-info"></i> Cancellation is free until 24 hours before.
+                            </div>
+                        </div>
+                        <div class="ticket-side">
+                            <strong>$120</strong>
+                            <button class="btn btn-outline" style="margin-top:10px; font-size:0.8rem;"
+                                onclick="showToast('Receipt Downloaded')">Receipt</button>
+                            <button class="btn btn-outline"
+                                style="margin-top:5px; font-size:0.8rem; color:var(--danger); border-color:var(--danger);"
+                                onclick="showToast('Cancellation Requested')">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="ticket-card" style="opacity:0.7;">
+                        <div class="ticket-main">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <h3>Hot Desk B2</h3>
+                                <span class="status-badge status-cancelled">Cancelled</span>
+                            </div>
+                            <p style="color:var(--text-muted);"><i class="ph ph-calendar"></i> Oct 15, 2023</p>
+                        </div>
+                        <div class="ticket-side">
+                            <strong style="text-decoration:line-through;">$25</strong>
+                            <small style="color:var(--text-muted)">Refunded</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. BOOKING MANAGEMENT (ADMIN) -->
+                <section id="management" class="section-container">
+                    <div class="grid-3">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Occupancy Rate</span></div>
+                            <h1 style="color:var(--primary)">85%</h1>
+                            <p style="color:var(--text-muted);">12 Desks Available</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Today's Revenue</span></div>
+                            <h1 style="color:var(--success)">$1,240</h1>
+                            <p style="color:var(--text-muted);">Projected: $1,500</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Pending Requests</span></div>
+                            <h1>4</h1>
+                            <button class="btn btn-outline" style="width:100%; margin-top:10px; justify-content:center;"
+                                onclick="showToast('Viewing Requests')">Review</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Pricing Rules</span><button
+                                    class="btn btn-primary" style="padding:4px 10px; font-size:0.8rem;">+ Add</button>
+                            </div>
+                            <div
+                                style="margin-bottom:10px; padding:10px; border:1px solid var(--border-color); border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between;"><strong>Hot
+                                        Desk</strong><span>$5/hr</span></div>
+                                <small style="color:var(--text-muted)">Standard Rate</small>
+                            </div>
+                            <div
+                                style="margin-bottom:10px; padding:10px; border:1px solid var(--border-color); border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between;"><strong>Meeting
+                                        Room</strong><span>$25/hr</span></div>
+                                <small style="color:var(--text-muted)">Includes Projector</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Block Schedule</span></div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:10px;">Block dates for
+                                maintenance or holidays.</p>
+                            <input type="date" style="margin-bottom:10px;">
+                            <textarea placeholder="Reason for blocking..." rows="2"></textarea>
+                            <button class="btn btn-danger" style="width:100%; justify-content:center;"
+                                onclick="showToast('Date Blocked')">Block Date</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. CUSTOMERS -->
+                <section id="customers" class="section-container">
+                    <div class="grid-3">
+                        <div class="card">
+                            <h1>1,240</h1>
+                            <span class="card-title">Total Members</span>
+                        </div>
+                        <div class="card">
+                            <h1>85</h1>
+                            <span class="card-title">New This Month</span>
+                        </div>
+                        <div class="card">
+                            <h1>$45</h1>
+                            <span class="card-title">Avg. Spend</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Member Directory</span><input type="text"
+                                    placeholder="Search..." style="width:200px; margin:0;"></div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Plan</th>
+                                        <th>Join Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Alice Freeman</strong></td>
+                                        <td>Flex</td>
+                                        <td>Oct 01, 2023</td>
+                                        <td><span class="status-badge status-active">Active</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Bob Smith</strong></td>
+                                        <td>Fixed</td>
+                                        <td>Sep 12, 2023</td>
+                                        <td><span class="status-badge status-active">Active</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Charlie Day</strong></td>
+                                        <td>Day Pass</td>
+                                        <td>Oct 20, 2023</td>
+                                        <td><span class="status-badge status-pending">Expired</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Add New Member</span></div>
+                            <form onsubmit="event.preventDefault(); showToast('Member Added');">
+                                <input type="text" placeholder="Full Name" required>
+                                <input type="email" placeholder="Email Address" required>
+                                <select>
+                                    <option>Select Plan</option>
+                                    <option>Hot Desk (Flex)</option>
+                                    <option>Private Desk (Fixed)</option>
+                                    <option>Virtual Office</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary"
+                                    style="width:100%; justify-content:center;">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. PAYMENTS -->
+                <section id="payments" class="section-container">
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Payment Methods</span></div>
+                            <div style="display:flex; align-items:center; gap:15px; margin-bottom:15px;">
+                                <i class="ph ph-credit-card" style="font-size:2rem; color:var(--primary);"></i>
+                                <div>
+                                    <strong>Visa ending in 4242</strong><br>
+                                    <small style="color:var(--text-muted)">Expires 12/25 • Default</small>
+                                </div>
+                                <button class="btn btn-outline" style="margin-left:auto;">Edit</button>
+                            </div>
+                            <div style="border-top:1px solid var(--border-color); padding-top:15px;">
+                                <button class="btn btn-outline" style="width:100%; justify-content:center;"><i
+                                        class="ph ph-plus"></i> Add New Card</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Billing Address</span></div>
+                            <p><strong>Alex Morgan</strong></p>
+                            <p style="color:var(--text-muted);">123 CoWorking St.<br>Tech City, TC 90210</p>
+                            <button class="btn btn-outline" style="margin-top:15px;">Update Address</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Transaction History</span></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#TXN-9981</td>
+                                    <td>Oct 25, 2023</td>
+                                    <td>Monthly Membership</td>
+                                    <td>$200.00</td>
+                                    <td><span class="status-badge status-active">Paid</span></td>
+                                    <td><i class="ph ph-download-simple" style="cursor:pointer;"
+                                            onclick="showToast('Downloading...')"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>#TXN-9982</td>
+                                    <td>Oct 20, 2023</td>
+                                    <td>Meeting Room B</td>
+                                    <td>$50.00</td>
+                                    <td><span class="status-badge status-active">Paid</span></td>
+                                    <td><i class="ph ph-download-simple" style="cursor:pointer;"
+                                            onclick="showToast('Downloading...')"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>#TXN-9983</td>
+                                    <td>Sep 25, 2023</td>
+                                    <td>Monthly Membership</td>
+                                    <td>$200.00</td>
+                                    <td><span class="status-badge status-active">Paid</span></td>
+                                    <td><i class="ph ph-download-simple" style="cursor:pointer;"
+                                            onclick="showToast('Downloading...')"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 6. COMMUNITY -->
+                <section id="community" class="section-container">
+                    <div class="grid-2">
+                        <!-- Feed -->
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Community Feed</span></div>
+
+                            <div class="feed-post">
+                                <div class="feed-header">
+                                    <img src="https://picsum.photos/seed/u1/40/40" class="avatar">
+                                    <div><strong>Sarah Jenkins</strong><br><small style="color:var(--text-muted)">2
+                                            hours ago</small></div>
+                                </div>
+                                <p>Anyone up for a coffee break at the communal kitchen in 10 mins? ☕</p>
+                            </div>
+
+                            <div class="feed-post">
+                                <div class="feed-header">
+                                    <img src="https://picsum.photos/seed/u2/40/40" class="avatar">
+                                    <div><strong>Dev Team</strong><br><small style="color:var(--text-muted)">5 hours
+                                            ago</small></div>
+                                </div>
+                                <p>Thanks to everyone who joined the workshop yesterday! Here are some photos.</p>
+                                <img src="https://picsum.photos/seed/event1/600/300" class="feed-image">
+                                <div style="margin-top:10px; display:flex; gap:15px;">
+                                    <span><i class="ph ph-heart"></i> 24 Likes</span>
+                                    <span><i class="ph ph-chat"></i> 5 Comments</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:20px;">
+                                <textarea placeholder="Share something with the community..." rows="2"></textarea>
+                                <button class="btn btn-primary" onclick="showToast('Posted to feed')">Post</button>
+                            </div>
+                        </div>
+
+                        <!-- Events & Gallery -->
+                        <div>
+                            <div class="card" style="margin-bottom:24px;">
+                                <div class="card-header"><span class="card-title">Upcoming Events</span></div>
+                                <div
+                                    style="margin-bottom:15px; border-left:3px solid var(--primary); padding-left:10px;">
+                                    <h4>Friday Happy Hour</h4>
+                                    <small style="color:var(--text-muted)">This Friday, 5:00 PM</small>
+                                </div>
+                                <div
+                                    style="margin-bottom:15px; border-left:3px solid var(--warning); padding-left:10px;">
+                                    <h4>Productivity Workshop</h4>
+                                    <small style="color:var(--text-muted)">Next Tuesday, 10:00 AM</small>
+                                </div>
+                                <button class="btn btn-outline" style="width:100%;">View Calendar</button>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header"><span class="card-title">Member Gallery</span></div>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px;">
+                                    <img src="https://picsum.photos/seed/g1/100/100"
+                                        style="width:100%; border-radius:4px;">
+                                    <img src="https://picsum.photos/seed/g2/100/100"
+                                        style="width:100%; border-radius:4px;">
+                                    <img src="https://picsum.photos/seed/g3/100/100"
+                                        style="width:100%; border-radius:4px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. PROMOTIONS -->
+                <section id="promotions" class="section-container">
+                    <div class="card"
+                        style="background: linear-gradient(135deg, var(--primary), #818cf8); color: white; margin-bottom:24px;">
+                        <h2>Refer a Friend, Get $50</h2>
+                        <p style="margin: 10px 0 20px;">For every friend who signs up for a monthly plan, you both get
+                            $50 credit.</p>
+                        <div style="display:flex; gap:10px;">
+                            <input type="text" value="COWORK-REF-2023" readonly
+                                style="background:rgba(255,255,255,0.2); color:white; border:none; width:200px;">
+                            <button class="btn" style="background:white; color:var(--primary);"
+                                onclick="showToast('Code Copied!')">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Active Coupons</span></div>
+                            <ul style="list-style:none;">
+                                <li
+                                    style="padding:10px 0; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between;">
+                                    <div><strong>WEEKEND20</strong><br><small>20% off weekend bookings</small></div>
+                                    <button class="btn btn-outline" onclick="showToast('Applied')">Apply</button>
+                                </li>
+                                <li style="padding:10px 0; display:flex; justify-content:space-between;">
+                                    <div><strong>FREETRIAL</strong><br><small>1 Free Day Pass</small></div>
+                                    <button class="btn btn-outline" onclick="showToast('Applied')">Apply</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Referral Progress</span></div>
+                            <p style="margin-bottom:10px;">You have referred <strong>2</strong> friends.</p>
+                            <div
+                                style="background:var(--bg-body); height:10px; border-radius:5px; overflow:hidden; margin-bottom:5px;">
+                                <div style="width:40%; background:var(--success); height:100%;"></div>
+                            </div>
+                            <small style="color:var(--text-muted);">3 more referrals to unlock Gold Status.</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. SUPPORT -->
+                <section id="support" class="section-container">
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Frequently Asked Questions</span></div>
+                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                <div class="faq-q">How do I book a desk? <i class="ph ph-caret-down"></i></div>
+                                <div class="faq-a">Go to the Dashboard and click "Book Desk" in the Quick Actions
+                                    section.</div>
+                            </div>
+                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                <div class="faq-q">Is parking included? <i class="ph ph-caret-down"></i></div>
+                                <div class="faq-a">Yes, all members have access to the basement parking garage from 6 AM
+                                    to 10 PM.</div>
+                            </div>
+                            <div class="faq-item" onclick="this.classList.toggle('active')">
+                                <div class="faq-q">Can I bring guests? <i class="ph ph-caret-down"></i></div>
+                                <div class="faq-a">Yes, you can bring up to 2 guests per day for free. Additional guests
+                                    require a day pass purchase.</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Contact Support</span></div>
+                            <form onsubmit="event.preventDefault(); showToast('Ticket Sent!');">
+                                <label>Subject</label>
+                                <select>
+                                    <option>Technical Issue</option>
+                                    <option>Billing Question</option>
+                                    <option>Facility Problem</option>
+                                </select>
+                                <label>Message</label>
+                                <textarea rows="4" placeholder="Describe your issue..."></textarea>
+                                <button type="submit" class="btn btn-primary" style="width:100%;">Submit Ticket</button>
+                            </form>
+                            <div
+                                style="margin-top:20px; text-align:center; border-top:1px solid var(--border-color); padding-top:20px;">
+                                <p style="margin-bottom:10px;">Or chat with us live</p>
+                                <button class="btn btn-outline" onclick="showToast('Live Chat Started')"><i
+                                        class="ph ph-chat-circle-dots"></i> Start Live Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. SECURITY -->
+                <section id="security" class="section-container">
+                    <div class="card" style="margin-bottom:24px;">
+                        <div class="card-header"><span class="card-title">Login History</span></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Device</th>
+                                    <th>Location</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="ph ph-laptop"></i> MacBook Pro (Chrome)</td>
+                                    <td>New York, USA</td>
+                                    <td>Just now</td>
+                                    <td><span class="status-badge status-active">Current</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="ph ph-device-mobile"></i> iPhone 14 (Safari)</td>
+                                    <td>New York, USA</td>
+                                    <td>2 hours ago</td>
+                                    <td><span class="status-badge status-active">OK</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="ph ph-windows-logo"></i> Windows PC (Edge)</td>
+                                    <td>Newark, USA</td>
+                                    <td>Oct 24, 2023</td>
+                                    <td><span class="status-badge status-cancelled">Logged out</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Security Settings</span></div>
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                                <div><strong>Two-Factor Authentication</strong><br><small>Add extra security to your
+                                        account.</small></div>
+                                <button class="btn btn-primary" onclick="showToast('2FA Setup Opened')">Enable</button>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div><strong>Login Alerts</strong><br><small>Email me on new logins.</small></div>
+                                <label style="position:relative; display:inline-block; width:40px; height:20px;"><input
+                                        type="checkbox" checked style="opacity:0; width:0; height:0;"><span
+                                        style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:var(--success); transition:.4s; border-radius:20px;"><span
+                                            style="position:absolute; content:''; height:16px; width:16px; left:2px; bottom:2px; background-color:white; transition:.4s; border-radius:50%; transform:translateX(20px);"></span></span></label>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header"><span class="card-title">Danger Zone</span></div>
+                            <p style="color:var(--text-muted); margin-bottom:15px;">Once you delete your account, there
+                                is no going back. Please be certain.</p>
+                            <button class="btn btn-danger" onclick="showToast('Deletion Requested')">Delete
+                                Account</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        const state = { theme: 'light' };
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+        const sidebar = document.getElementById('sidebar');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const pageTitle = document.getElementById('page-title');
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.section-container');
+
+        function toggleTheme() {
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', state.theme);
+            themeIcon.classList.replace(state.theme === 'light' ? 'ph-sun' : 'ph-moon', state.theme === 'light' ? 'ph-moon' : 'ph-sun');
+        }
+
+        function switchTab(tabId, element) {
+            navItems.forEach(i => i.classList.remove('active'));
+            if (element) element.classList.add('active');
+            else navItems.forEach(i => { if (i.getAttribute('onclick').includes(tabId)) i.classList.add('active'); });
+
+            sections.forEach(s => s.classList.remove('active'));
+            const sec = document.getElementById(tabId);
+            if (sec) sec.classList.add('active');
+
+            if (element) pageTitle.textContent = element.innerText.trim();
+            if (window.innerWidth <= 768) sidebar.classList.remove('open');
+        }
+
+        function toggleSidebar() { sidebar.classList.toggle('open'); }
+        function toggleDropdown() { profileDropdown.classList.toggle('show'); }
+        window.onclick = e => { if (!e.target.closest('.profile-menu')) profileDropdown.classList.remove('show'); };
+
+        function showToast(msg) {
+            const c = document.getElementById('toastContainer');
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.innerHTML = `<i class="ph ph-info" style="font-size:1.2rem; color:var(--primary);"></i> <span>${msg}</span>`;
+            c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(100%)'; setTimeout(() => t.remove(), 300); }, 3000);
+        }
+        function logout() { showToast('Logging out...'); setTimeout(() => location.reload(), 1500); }
+    </script>
+</body>
+
+</html>

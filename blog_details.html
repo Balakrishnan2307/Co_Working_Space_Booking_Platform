@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Co_Working_Space_Booking_Platform</title>
+    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+    <meta name="description" content="Detailed insights on co-working spaces.">
+    <meta name="keywords" content="blog, coworking, details, workspace">
+
+    <!-- FIX 1: Instant Theme Loader (Prevents Flash of Wrong Color) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files (CDNs) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        /* 1. Variables */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --font-default: "Roboto", sans-serif;
+            --font-primary: "Montserrat", sans-serif;
+            --color-primary: #3f51b5;
+            /* Indigo */
+            --color-secondary: #ff6b6b;
+            /* Coral */
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* Dark Mode Variables */
+        [data-bs-theme="dark"] {
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --bg-white: #1e293b;
+            /* Dark Gray for Cards */
+            --bg-light: #0f172a;
+            /* Very Dark for Background */
+            --border-color: #334155;
+            --color-primary: #6366f1;
+        }
+
+        /* Global */
+        body {
+            font-family: var(--font-default);
+            color: var(--bs-body-color);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-primary);
+        }
+
+        /* FIX 3: Spacing Improvements */
+        section {
+            padding: 80px 0;
+        }
+
+        /* Global padding for sections */
+        .section-sm {
+            padding: 40px 0;
+        }
+
+        /* =========================================
+           NEW NAVBAR DESIGN
+        ========================================= */
+        .navbar-custom {
+            background: var(--bg-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar-custom {
+            background: rgba(15, 23, 42, 0.95);
+            /* Darker background for white text contrast */
+            border-bottom: 1px solid #334155;
+        }
+
+        /* Added this class for the scroll effect JS */
+        .navbar-custom.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        [data-theme="dark"] .navbar-custom.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            margin: 0 10px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-color);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Navbar Controls (Buttons) */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-control:hover {
+            background: var(--primary-color);
+            color: white !important;
+            border-color: var(--primary-color);
+        }
+
+        .btn-nav-cta {
+            background: var(--primary-color);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           DEPARTMENT DETAILS STYLES (With Spacing Fixes)
+    ========================================= */
+
+        /* Page Title */
+        .page-title {
+            padding-top: 140px;
+            /* Account for fixed header + topbar */
+            padding-bottom: 80px;
+            background: linear-gradient(rgba(31, 41, 55, 0.9), rgba(63, 81, 181, 0.8)), url('https://picsum.photos/seed/blog_details/1920/600.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        [data-bs-theme="dark"] .page-title {
+            /* Darker overlay in dark mode */
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(15, 23, 42, 0.9)), url('https://picsum.photos/seed/blog_details/1920/600.jpg') center/cover no-repeat;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Hero Section */
+        .department-hero {
+            padding: 40px 0;
+        }
+
+        .department-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
+
+        .department-intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .key-highlights {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .highlight-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .highlight-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Overview Section */
+        .services-overview {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .overview-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .overview-header h3 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .overview-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+        }
+
+        /* Service Grid Items (Spaced out) */
+        .service-item {
+            background: var(--bg-white);
+            padding: 40px 30px;
+            /* Increased padding */
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(63, 81, 181, 0.1);
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        [data-bs-theme="dark"] .service-icon {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .service-item h4 {
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Expert Section */
+        .expert-image img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .expert-content {
+            padding: 40px;
+            /* Added padding */
+            background: var(--bg-white);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .expert-content h3 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .expert-content .lead {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .expertise-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .expertise-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .expertise-item i {
+            color: var(--color-primary);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer (Matching Index) */
+        .footer {
+            background-color: #0f172a;
+            color: #fff;
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #adb5bd;
+        }
+
+        .footer a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer h6 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #adb5bd;
+        }
+
+        .footer .contact-item i {
+            margin-right: 10px;
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c757d;
+        }
+
+        .footer-bottom a {
+            color: #6c757d;
+            margin-left: 20px;
+        }
+
+        /* Utilities */
+        .scroll-top {
+            position: fixed;
+            visibility: hidden;
+            opacity: 0;
+            right: 15px;
+            bottom: -15px;
+            z-index: 99999;
+            background-color: var(--color-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.4s;
+            color: #fff;
+        }
+
+        .scroll-top.active {
+            visibility: visible;
+            opacity: 1;
+            bottom: 15px;
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.5s ease-in-out;
+        }
+
+        [data-bs-theme="dark"] #preloader {
+            background: #212529;
+        }
+
+        #preloader:before {
+            content: "";
+            position: absolute;
+            top: calc(50% - 30px);
+            left: calc(50% - 30px);
+            border: 4px solid var(--color-primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: animate-preloader 1s linear infinite;
+        }
+
+        @keyframes animate-preloader {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="department-details-page">
+
+    <!-- Preloader -->
+
+
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <!-- User's local logo or Fallback -->
+                <img src="Dashboard/assets/images/logo.png" alt="Logo"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span
+                    style="display:none; font-weight: 800; font-size: 1.5rem; color: var(--primary-color);">CoWork</span>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-2" style="color: var(--text-color);"></i>
+            </button>
+
+            <!-- Nav Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="home_2.html">Home 2</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about_1.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="service_1.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact_1.html">Contact</a></li>
+                </ul>
+
+                <!-- Controls -->
+                <div class="nav-controls mt-3 mt-lg-0">
+                    <!-- RTL Toggle -->
+                    <button class="btn-control" onclick="toggleRTL()" title="Switch RTL/LTR">
+                        <i class="bi bi-textarea-t"></i>
+                    </button>
+
+                    <!-- Dark Mode Toggle -->
+                    <button class="btn-control" onclick="myFunction()" title="Switch Theme">
+                        <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
+                    </button>
+
+                    <!-- Dashboard Dropdown -->
+                    <div class="dropdown">
+                        <a href="#" class="btn-control dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="bi bi-grid-fill"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="dashboard.html">Dashboard 1</a></li>
+                            <li><a class="dropdown-item" href="dashboard_2.html">Dashboard 2</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- CTA -->
+                    <a href="#" class="btn-nav-cta d-none d-lg-inline-block">Book Space</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1 class="heading-title" data-aos="fade-up">Blog Details</h1>
+                            <p class="mb-0 lead" data-aos="fade-up" data-aos-delay="100">
+                                Co-working spaces have transformed the way professionals work by offering flexible,
+                                collaborative, and
+                                cost-effective environments. From freelancers and startups to growing businesses,
+                                co-working spaces
+                                provide modern infrastructure without the burden of long-term leases.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Page Title -->
+
+        <!-- Department Details Section -->
+        <section id="department-details" class="department-details section section-sm">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-7">
+                        <div class="department-hero" data-aos="fade-right" data-aos-delay="200">
+
+                            <h1 class="department-title">Key Features of Modern Co-Working Spaces</h1>
+                            <p class="department-intro">Modern co-working spaces are equipped with high-speed internet,
+                                comfortable
+                                workstations, meeting rooms, conference halls, printing facilities, and relaxation
+                                areas.</p>
+
+                            <div class="key-highlights">
+                                <div class="highlight-item">
+                                    <span class="highlight-number">10,000+</span>
+                                    <span class="highlight-text">Sq. Ft. Smart Workspace</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <span class="highlight-number">500+</span>
+                                    <span class="highlight-text">Happy Members & Teams</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-5 mt-5 mt-lg-0">
+                        <div class="department-visual" data-aos="fade-left" data-aos-delay="300">
+                            <div class="image-container">
+                                <img src="https://picsum.photos/seed/workspace_detail/600/500" alt="Modern Workspace"
+                                    class="img-fluid primary-image w-100 rounded shadow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-overview" data-aos="fade-up" data-aos-delay="400">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="overview-header">
+                                <h3>Benefits of a Collaborative Work Environment</h3>
+                                <p>Working alongside like-minded professionals opens doors to collaboration and
+                                    learning. Co-working
+                                    spaces foster a community where ideas are exchanged, partnerships are formed, and
+                                    innovation thrives.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row gy-4 services-grid">
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <h4>Knowledge Sharing</h4>
+                                <p>Team members exchange ideas, skills, and experiences, leading to better learning and
+                                    innovation.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="550">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                                <h4>Increased Productivity</h4>
+                                <p>Working alongside motivated professionals boosts focus, accountability, and overall
+                                    work efficiency.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </div>
+                                <h4>Strong Networking Opportunities</h4>
+                                <p>Collaboration opens doors to partnerships, clients, and career growth through
+                                    meaningful connections.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="650">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-person-gear"></i>
+                                </div>
+                                <h4>Faster Problem Solving</h4>
+                                <p>Diverse perspectives help solve challenges quickly and creatively.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-moon"></i>
+                                </div>
+                                <h4>Enhanced Creativity & Innovation</h4>
+                                <p>A shared environment inspires fresh ideas and encourages out-of-the-box thinking.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="750">
+                            <div class="service-item">
+                                <div class="service-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h4>Improved Communication</h4>
+                                <p>Regular interaction improves teamwork, transparency, and mutual understanding.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expert-care-section mt-5" data-aos="fade-up" data-aos-delay="800">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5" data-aos="fade-right" data-aos-delay="900">
+                            <div class="expert-image">
+                                <img src="https://picsum.photos/seed/startup_team/600/600" alt="Co-Working Team"
+                                    class="img-fluid w-100">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-7 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="900">
+                            <div class="expert-content">
+                                <h3>Perfect for Startups and Growing Teams</h3>
+                                <p class="lead">For startups, co-working spaces offer scalability without heavy
+                                    investment. Teams can
+                                    expand or downsize easily while enjoying a professional business address and shared
+                                    resources. This
+                                    makes co-working an ideal solution for fast-growing companies.</p>
+
+                                <div class="expertise-list">
+                                    <div class="expertise-item">
+                                        <i class="bi bi-check2-circle"></i>
+                                        <span>Flexible & Scalable Workspace</span>
+                                    </div>
+                                    <div class="expertise-item">
+                                        <i class="bi bi-check2-circle"></i>
+                                        <span>No Long-Term Commitments</span>
+                                    </div>
+                                    <div class="expertise-item">
+                                        <i class="bi bi-check2-circle"></i>
+                                        <span>Cost-Effective Office Solutions</span>
+                                    </div>
+                                    <div class="expertise-item">
+                                        <i class="bi bi-check2-circle"></i>
+                                        <span>Fully Furnished & Ready-to-Use</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer (Matching Index Design) -->
+    <footer id="footer" class="footer position-relative">
+        <div class="container">
+            <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-start">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <div class="brand-section">
+                            <a href="index.html" class="logo d-flex align-items-center mb-4">
+                                <img src="Dashboard/assets/images/logo.png" width="150px" alt="">
+                            </a>
+                            <p class="brand-description text-secondary">Crafting exceptional digital experiences through
+                                thoughtful design and innovative solutions that elevate your brand presence.</p>
+                            <div class="contact-info mt-5">
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>123 Creative Boulevard, Design District, NY 10012</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone"></i>
+                                    <span>+1 (555) 987-6543</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope"></i>
+                                    <span>hello@cospace.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="footer-nav-wrapper">
+                            <div class="row">
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <div class="nav-column">
+                                        <h6>Studio</h6>
+                                        <nav class="footer-nav d-flex flex-column gap-2">
+                                            <a href="about.html">Our Story</a>
+                                            <a href="#">Design Process</a>
+                                            <a href="#">Portfolio</a>
+                                            <a href="#">Case Studies</a>
+                                            <a href="#">Awards</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <div class="nav-column">
+                                        <h6>Services</h6>
+                                        <nav class="footer-nav d-flex flex-column gap-2">
+                                            <a href="#">Brand Identity</a>
+                                            <a href="#">Web Design</a>
+                                            <a href="#">Mobile Apps</a>
+                                            <a href="#">Digital Strategy</a>
+                                            <a href="#">Consultation</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <div class="nav-column">
+                                        <h6>Resources</h6>
+                                        <nav class="footer-nav d-flex flex-column gap-2">
+                                            <a href="#">Design Blog</a>
+                                            <a href="#">Style Guide</a>
+                                            <a href="#">Free Assets</a>
+                                            <a href="#">Tutorials</a>
+                                            <a href="#">Inspiration</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <div class="nav-column">
+                                        <h6>Connect</h6>
+                                        <nav class="footer-nav d-flex flex-column gap-2">
+                                            <a href="#">Start Project</a>
+                                            <a href="#">Schedule Call</a>
+                                            <a href="#">Join Newsletter</a>
+                                            <a href="#">Follow Updates</a>
+                                            <a href="#">Partnership</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <div class="copyright">
+                                <p>© 2026 <span class="sitename">Co-working Booking Platform</span>. All rights
+                                    reserved.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end mt-3 mt-lg-0">
+                            <div class="legal-links">
+                                <a href="#!">Privacy Policy</a>
+                                <a href="#!">Terms of Service</a>
+                                <a href="#!">Cookie Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Main JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Initialize AOS
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // 2. Dark/Light Mode Logic
+            // Note: The theme is already set by the script in <head>, 
+            // so we just need to sync the icon here.
+            const htmlElement = document.documentElement;
+            const currentTheme = htmlElement.getAttribute('data-bs-theme') || 'light';
+            updateIcon(currentTheme);
+
+            window.myFunction = function () {
+                const newTheme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            };
+
+            function setTheme(theme) {
+                htmlElement.setAttribute('data-bs-theme', theme);
+                localStorage.setItem('theme', theme);
+                updateIcon(theme);
+            }
+
+            function updateIcon(theme) {
+                const icon = document.querySelector('.btn-icon[onclick="myFunction()"] i');
+                if (icon) {
+                    if (theme === 'dark') {
+                        icon.classList.remove('bi-moon-stars-fill');
+                        icon.classList.add('bi-sun-fill');
+                    } else {
+                        icon.classList.remove('bi-sun-fill');
+                        icon.classList.add('bi-moon-stars-fill');
+                    }
+                }
+            }
+
+            // 3. RTL Toggle
+            window.toggleRTL = function () {
+                const html = document.documentElement;
+                const currentDir = html.getAttribute('dir');
+                const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+                html.setAttribute('dir', newDir);
+            };
+
+            // 4. Mobile Navigation Toggle
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const navMenu = document.querySelector('.navmenu');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', () => {
+                    if (mobileNav) {
+                        mobileNav.classList.toggle('active');
+                        mobileNavToggle.classList.toggle('bi-list');
+                        mobileNavToggle.classList.toggle('bi-x');
+                    }
+                });
+            }
+
+            const closeMobileNav = document.getElementById('close-mobile-nav');
+            if (closeMobileNav) {
+                closeMobileNav.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileNavToggle.classList.add('bi-list');
+                    mobileNavToggle.classList.remove('bi-x');
+                });
+            }
+
+            document.querySelectorAll('.navmenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileNav && mobileNav.classList.contains('active')) {
+                        mobileNav.classList.remove('active');
+                        mobileNavToggle.classList.add('bi-list');
+                        mobileNavToggle.classList.remove('bi-x');
+                    }
+                });
+            });
+
+            // 5. Scroll Effect for Header
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 6. Scroll Top Button
+            const scrollTop = document.querySelector('.scroll-top');
+            if (scrollTop) {
+                const toggleScrollTop = function () {
+                    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+                };
+                window.addEventListener('load', toggleScrollTop);
+                document.addEventListener('scroll', toggleScrollTop);
+
+                scrollTop.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // 7. Preloader Removal
+            const preloader = document.querySelector('#preloader');
+            if (preloader) {
+                window.addEventListener('load', () => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

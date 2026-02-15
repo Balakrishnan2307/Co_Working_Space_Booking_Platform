@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co_Working_Space_Booking_Platform</title>
+    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338ca;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+
+            /* Light Mode */
+            --bg-body: #f1f5f9;
+            --bg-sidebar: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-sidebar: #1e293b;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            /* Prevent body scroll, handle internally */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- Layout Structure --- */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .logo-area {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-area i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 12px;
+        }
+
+        .logo-area span {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .nav-links {
+            flex: 1;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+
+        .nav-category {
+            padding: 0 24px 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 500;
+        }
+
+        .nav-item i {
+            width: 24px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        .user-profile-mini {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .user-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Main wrapper doesn't scroll */
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            height: 70px;
+            background-color: var(--bg-sidebar);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            flex-shrink: 0;
+        }
+
+        .header-left h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+        }
+
+        /* Scrollable Content Area */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            /* Only this scrolls */
+            padding: 32px;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Views --- */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dashboard Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .bg-blue {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+        }
+
+        .bg-green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .bg-orange {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .bg-red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat-trend {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: var(--danger);
+        }
+
+        /* Content Cards */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Tables */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 16px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-paid,
+        .status-confirmed {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending,
+        .status-waitlist {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-overdue,
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        /* Workspace Grid */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .workspace-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .workspace-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .workspace-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .workspace-info {
+            padding: 20px;
+        }
+
+        .workspace-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+
+        .workspace-price span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Availability Calendar (Simplified) */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .cal-day {
+            background: var(--bg-body);
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cal-day:hover {
+            background: #e2e8f0;
+        }
+
+        .cal-day.available {
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .cal-day.full {
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+
+        /* Pricing Plans */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--text-main);
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .price-features li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--text-main);
+            color: var(--bg-body);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+            margin-right: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -260px;
+                height: 100%;
+                box-shadow: var(--shadow);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            header {
+                padding: 0 16px;
+            }
+
+            .content-area {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-area">
+
+                <a href="index.html">
+                    <img src="Dashboard/assets/images/logo.png" width="150px" alt="">
+                </a>
+            </div>
+
+            <nav class="nav-links">
+                <div class="nav-category">Main</div>
+                <a href="#" class="nav-item active" onclick="switchView('dashboard', this)">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" onclick="switchView('analytics', this)">
+                    <i class="fa-solid fa-chart-line"></i> Analytics
+                </a>
+
+                <div class="nav-category">Manage</div>
+                <a href="#" class="nav-item" onclick="switchView('bookings', this)">
+                    <i class="fa-solid fa-calendar-check"></i> My Reservations
+                </a>
+                <a href="#" class="nav-item" onclick="switchView('transactions', this)">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Transaction History
+                </a>
+                <a href="#" class="nav-item" onclick="switchView('workspace', this)">
+                    <i class="fa-solid fa-desktop"></i> Workspace Overview
+                </a>
+
+                <div class="nav-category">Discovery</div>
+                <a href="#" class="nav-item" onclick="switchView('availability', this)">
+                    <i class="fa-regular fa-clock"></i> Availability
+                </a>
+                <a href="#" class="nav-item" onclick="switchView('pricing', this)">
+                    <i class="fa-solid fa-tags"></i> Pricing Plans
+                </a>
+            </nav>
+
+            <div class="user-profile-mini">
+                <img src="https://picsum.photos/seed/user123/100/100" alt="Profile" class="avatar">
+                <div class="user-info">
+                    <h4>Alex Morgan</h4>
+                    <p>Freelancer</p>
+                </div>
+                <a href="index.html" class="icon-btn" style="margin-left: auto;" onclick="handleLogout()"
+                    title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+                <!-- <button class="icon-btn" style="margin-left: auto;" onclick="handleLogout()" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button> -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-left" style="display: flex; align-items: center;">
+                    <button class="mobile-toggle" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">
+                        <i class="fa-solid fa-moon" id="theme-icon"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic Content Area -->
+            <div class="content-area">
+
+                <!-- VIEW: Dashboard -->
+                <section id="dashboard" class="view-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value">12</div>
+                                    <div class="stat-label">Total Bookings</div>
+                                </div>
+                                <div class="stat-icon bg-blue"><i class="fa-solid fa-chair"></i></div>
+                            </div>
+                            <div class="stat-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +2 this week
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value">$450</div>
+                                    <div class="stat-label">Total Spent</div>
+                                </div>
+                                <div class="stat-icon bg-green"><i class="fa-solid fa-wallet"></i></div>
+                            </div>
+                            <div class="stat-trend trend-up"><i class="fa-solid fa-check"></i> All invoices paid</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">Upcoming Reservations</div>
+                                </div>
+                                <div class="stat-icon bg-orange"><i class="fa-solid fa-calendar-day"></i></div>
+                            </div>
+                            <div class="stat-trend">Next: Today, 2:00 PM</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value">24h</div>
+                                    <div class="stat-label">Usage Time</div>
+                                </div>
+                                <div class="stat-icon bg-red"><i class="fa-solid fa-clock"></i></div>
+                            </div>
+                            <div class="stat-trend trend-down">-4h vs last month</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Activity</h3>
+                            <button class="btn btn-outline">View All</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Activity</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa-solid fa-desktop"></i> Hot Desk Booking - Desk 4</td>
+                                            <td>Oct 24, 2023</td>
+                                            <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                            <td>$25.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa-solid fa-video"></i> Meeting Room A</td>
+                                            <td>Oct 22, 2023</td>
+                                            <td><span class="status-badge status-confirmed">Completed</span></td>
+                                            <td>$45.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa-solid fa-file-invoice"></i> Invoice #INV-2023-001</td>
+                                            <td>Oct 20, 2023</td>
+                                            <td><span class="status-badge status-paid">Paid</span></td>
+                                            <td>$120.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Analytics -->
+                <section id="analytics" class="view-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Financial Overview</h3>
+                            <select style="padding: 5px; border-radius: 4px; border: 1px solid var(--border-color);">
+                                <option>Last 30 Days</option>
+                                <option>Last 6 Months</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <!-- Simple CSS Chart Representation -->
+                            <div
+                                style="display: flex; align-items: flex-end; justify-content: space-around; height: 200px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                                <div style="width: 40px; height: 40%; background: var(--secondary); opacity: 0.3; border-radius: 4px 4px 0 0;"
+                                    title="Week 1"></div>
+                                <div style="width: 40px; height: 70%; background: var(--secondary); opacity: 0.5; border-radius: 4px 4px 0 0;"
+                                    title="Week 2"></div>
+                                <div style="width: 40px; height: 50%; background: var(--secondary); opacity: 0.4; border-radius: 4px 4px 0 0;"
+                                    title="Week 3"></div>
+                                <div style="width: 40px; height: 90%; background: var(--primary); border-radius: 4px 4px 0 0;"
+                                    title="Week 4"></div>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-around; margin-top: 10px; color: var(--text-muted); font-size: 0.8rem;">
+                                <span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Invoices Pending</h3>
+                            <div class="stat-value" style="margin-top: 10px;">$0.00</div>
+                            <p style="color: var(--success); font-size: 0.9rem;">You are up to date!</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Payment Method</h3>
+                            <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                                <span>•••• 4242</span>
+                            </div>
+                            <button class="btn btn-outline" style="margin-top: 15px; width: 100%;">Update Card</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Bookings -->
+                <section id="bookings" class="view-section">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search reservations..."
+                                style="padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); width: 300px; background: var(--bg-card); color: var(--text-main);">
+                        </div>
+                        <button class="btn btn-primary" onclick="switchView('availability')">+ New Booking</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Workspace</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Duration</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Private Office 102</td>
+                                        <td>Oct 25, 2023</td>
+                                        <td>09:00 AM</td>
+                                        <td>4 Hours</td>
+                                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                        <td><button class="icon-btn"><i
+                                                    class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hot Desk 5</td>
+                                        <td>Oct 26, 2023</td>
+                                        <td>10:00 AM</td>
+                                        <td>8 Hours</td>
+                                        <td><span class="status-badge status-pending">Pending</span></td>
+                                        <td><button class="icon-btn"><i
+                                                    class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Meeting Room B</td>
+                                        <td>Oct 28, 2023</td>
+                                        <td>02:00 PM</td>
+                                        <td>2 Hours</td>
+                                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                        <td><button class="icon-btn"><i
+                                                    class="fa-solid fa-ellipsis-vertical"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Transactions -->
+                <section id="transactions" class="view-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Transaction History</h3>
+                        </div>
+                        <div class="card-body">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Receipt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#TXN-8842</td>
+                                        <td>Monthly Membership</td>
+                                        <td>Oct 01, 2023</td>
+                                        <td>$199.00</td>
+                                        <td><span class="status-badge status-paid">Paid</span></td>
+                                        <td><button class="btn btn-outline"
+                                                style="padding: 4px 10px; font-size: 0.8rem;">PDF</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TXN-8845</td>
+                                        <td>Extra Day Pass</td>
+                                        <td>Oct 05, 2023</td>
+                                        <td>$25.00</td>
+                                        <td><span class="status-badge status-paid">Paid</span></td>
+                                        <td><button class="btn btn-outline"
+                                                style="padding: 4px 10px; font-size: 0.8rem;">PDF</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TXN-9012</td>
+                                        <td>Meeting Room B (2hr)</td>
+                                        <td>Oct 12, 2023</td>
+                                        <td>$40.00</td>
+                                        <td><span class="status-badge status-overdue">Overdue</span></td>
+                                        <td><button class="btn btn-primary"
+                                                style="padding: 4px 10px; font-size: 0.8rem;">Pay Now</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Workspace Overview -->
+                <section id="workspace" class="view-section">
+                    <div class="workspace-grid">
+                        <!-- Card 1 -->
+                        <div class="workspace-card">
+                            <img src="https://picsum.photos/seed/desk1/400/300" alt="Hot Desk" class="workspace-img">
+                            <div class="workspace-info">
+                                <h4>Hot Desk Area</h4>
+                                <p class="text-muted" style="color: var(--text-muted); font-size: 0.9rem;">Open plan,
+                                    high speed wifi.</p>
+                                <div class="workspace-price">$25 <span>/ day</span></div>
+                                <button class="btn btn-primary" style="width: 100%;"
+                                    onclick="showToast('Redirecting to booking...')">Book Now</button>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="workspace-card">
+                            <img src="https://picsum.photos/seed/office1/400/300" alt="Private Office"
+                                class="workspace-img">
+                            <div class="workspace-info">
+                                <h4>Private Office</h4>
+                                <p class="text-muted" style="color: var(--text-muted); font-size: 0.9rem;">Lockable
+                                    space for 4.</p>
+                                <div class="workspace-price">$150 <span>/ day</span></div>
+                                <button class="btn btn-primary" style="width: 100%;"
+                                    onclick="showToast('Redirecting to booking...')">Book Now</button>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="workspace-card">
+                            <img src="https://picsum.photos/seed/meeting/400/300" alt="Meeting Room"
+                                class="workspace-img">
+                            <div class="workspace-info">
+                                <h4>Conference Room</h4>
+                                <p class="text-muted" style="color: var(--text-muted); font-size: 0.9rem;">AV equip
+                                    included, 10 ppl.</p>
+                                <div class="workspace-price">$50 <span>/ hr</span></div>
+                                <button class="btn btn-primary" style="width: 100%;"
+                                    onclick="showToast('Redirecting to booking...')">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Availability -->
+                <section id="availability" class="view-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Hot Desk Availability - October 2023</h3>
+                            <div style="display: flex; gap: 10px; font-size: 0.8rem;">
+                                <span style="display: flex; align-items: center; gap: 5px;"><span
+                                        style="width: 10px; height: 10px; background: var(--success); border-radius: 50%;"></span>
+                                    Open</span>
+                                <span style="display: flex; align-items: center; gap: 5px;"><span
+                                        style="width: 10px; height: 10px; background: var(--text-muted); border-radius: 50%;"></span>
+                                    Full</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="calendar-grid">
+                                <!-- Generated Days -->
+                                <div class="cal-day">1</div>
+                                <div class="cal-day full">2</div>
+                                <div class="cal-day">3</div>
+                                <div class="cal-day">4</div>
+                                <div class="cal-day full">5</div>
+                                <div class="cal-day">6</div>
+                                <div class="cal-day">7</div>
+                                <div class="cal-day">8</div>
+                                <div class="cal-day">9</div>
+                                <div class="cal-day">10</div>
+                                <div class="cal-day">11</div>
+                                <div class="cal-day">12</div>
+                                <div class="cal-day">13</div>
+                                <div class="cal-day">14</div>
+                                <div class="cal-day full">15</div>
+                                <div class="cal-day">16</div>
+                                <div class="cal-day">17</div>
+                                <div class="cal-day">18</div>
+                                <div class="cal-day">19</div>
+                                <div class="cal-day">20</div>
+                                <div class="cal-day">21</div>
+                                <div class="cal-day">22</div>
+                                <div class="cal-day">23</div>
+                                <div class="cal-day full">24</div>
+                                <div class="cal-day available">25</div>
+                                <div class="cal-day available">26</div>
+                                <div class="cal-day">27</div>
+                                <div class="cal-day">28</div>
+                                <div class="cal-day">29</div>
+                                <div class="cal-day">30</div>
+                                <div class="cal-day">31</div>
+                            </div>
+                            <div style="margin-top: 20px; text-align: right;">
+                                <button class="btn btn-primary"
+                                    onclick="showToast('Booking created for selected dates!')">Confirm
+                                    Selection</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Pricing Plans -->
+                <section id="pricing" class="view-section">
+                    <div class="pricing-grid">
+                        <div class="price-card">
+                            <h3>Flex</h3>
+                            <div class="price-tag">$25<span
+                                    style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">/day</span>
+                            </div>
+                            <p style="color: var(--text-muted); margin-bottom: 20px;">Perfect for occasional use.</p>
+                            <ul class="price-features">
+                                <li><i class="fa-solid fa-check"></i> Hot Desk Access</li>
+                                <li><i class="fa-solid fa-check"></i> High-Speed WiFi</li>
+                                <li><i class="fa-solid fa-check"></i> Coffee & Tea</li>
+                            </ul>
+                            <button class="btn btn-outline" style="width: 100%;">Current Plan</button>
+                        </div>
+
+                        <div class="price-card featured">
+                            <div
+                                style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--primary); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">
+                                POPULAR</div>
+                            <h3>Unlimited</h3>
+                            <div class="price-tag">$199<span
+                                    style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">/mo</span>
+                            </div>
+                            <p style="color: var(--text-muted); margin-bottom: 20px;">For full-time professionals.</p>
+                            <ul class="price-features">
+                                <li><i class="fa-solid fa-check"></i> 24/7 Access</li>
+                                <li><i class="fa-solid fa-check"></i> Dedicated Locker</li>
+                                <li><i class="fa-solid fa-check"></i> Meeting Room Credits</li>
+                                <li><i class="fa-solid fa-check"></i> Mail Handling</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;"
+                                onclick="showToast('Upgrade plan selected')">Upgrade</button>
+                        </div>
+
+                        <div class="price-card">
+                            <h3>Fixed Desk</h3>
+                            <div class="price-tag">$350<span
+                                    style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">/mo</span>
+                            </div>
+                            <p style="color: var(--text-muted); margin-bottom: 20px;">Your own permanent spot.</p>
+                            <ul class="price-features">
+                                <li><i class="fa-solid fa-check"></i> Personal Desk</li>
+                                <li><i class="fa-solid fa-check"></i> Ergonomic Chair</li>
+                                <li><i class="fa-solid fa-check"></i> Monitor Mount</li>
+                                <li><i class="fa-solid fa-check"></i> 24/7 Access</li>
+                            </ul>
+                            <button class="btn btn-outline" style="width: 100%;">Select</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Component -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i>
+        <span id="toast-msg">Action Successful</span>
+    </div>
+
+    <script>
+        // --- Navigation Logic ---
+        function switchView(viewId, navElement = null) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.view-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Show target section
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.classList.add('active');
+                // Update Header Title
+                const titleMap = {
+                    'dashboard': 'Dashboard',
+                    'analytics': 'Analytics & Finance',
+                    'bookings': 'My Reservations',
+                    'transactions': 'Transaction History',
+                    'workspace': 'Workspace Overview',
+                    'availability': 'Check Availability',
+                    'pricing': 'Pricing Plans'
+                };
+                document.getElementById('page-title').innerText = titleMap[viewId] || 'Dashboard';
+            }
+
+            // Update Nav Active State (if clicked via nav)
+            if (navElement) {
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+                navElement.classList.add('active');
+
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            }
+        }
+
+        // --- Sidebar Toggle (Mobile) ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+
+            // Close sidebar if clicking outside on mobile
+            if (sidebar.classList.contains('open')) {
+                document.addEventListener('click', closeSidebarOutside);
+            }
+        }
+
+        function closeSidebarOutside(e) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-toggle');
+
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+                document.removeEventListener('click', closeSidebarOutside);
+            }
+        }
+
+        // --- Theme Toggle ---
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('theme-icon').classList.remove('fa-moon');
+            document.getElementById('theme-icon').classList.add('fa-sun');
+        }
+
+        // --- Toast Notification ---
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgSpan = document.getElementById('toast-msg');
+
+            msgSpan.innerText = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // --- Logout Handler ---
+        function handleLogout() {
+            // Confirm logic without native alert (simulated)
+            const confirmed = window.confirm("Are you sure you want to log out?");
+            if (confirmed) {
+                showToast("Logging out...");
+                setTimeout(() => {
+                    location.reload(); // Simple reload to simulate reset
+                }, 1000);
+            }
+        }
+
+        // --- Availability Calendar Interaction ---
+        const days = document.querySelectorAll('.cal-day.available');
+        days.forEach(day => {
+            day.addEventListener('click', function () {
+                // Toggle selection logic
+                if (this.style.backgroundColor === 'var(--primary)') {
+                    this.style.backgroundColor = 'var(--bg-body)';
+                    this.style.color = 'var(--success)';
+                } else {
+                    this.style.backgroundColor = 'var(--primary)';
+                    this.style.color = '#fff';
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

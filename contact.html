@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Co_Working_Space_Booking_Platform</title>
-    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
   <meta name="description" content="Get in touch with CoWork Hub.">
   <meta name="keywords" content="contact, coworking, support, booking">
 
@@ -208,6 +208,29 @@
     .btn-nav-cta:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
+    }
+
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      margin-top: 10px !important;
+    }
+
+    .dropdown-item {
+      padding: 8px 20px;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+      background-color: var(--bg-light);
+      color: var(--primary-color);
     }
 
 
@@ -511,8 +534,16 @@
       <!-- Nav Items -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="index_2.html">Home 2</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="homeDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+              <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+              <li><a class="dropdown-item active" href="index_2.html">Home 2</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
@@ -544,7 +575,7 @@
           </div>
 
           <!-- CTA -->
-          <a href="#" class="btn-nav-cta d-none d-lg-inline-block">Book Space</a>
+          <!-- <a href="#" class="btn-nav-cta d-none d-lg-inline-block">Book Space</a> -->
         </div>
       </div>
     </div>
@@ -663,117 +694,6 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer id="footer" class="footer position-relative">
-    <div class="container">
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
-          <div class="col-lg-5 mb-5 mb-lg-0">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <h4 class="sitename m-0 d-flex align-items-center gap-2">
-                  <i class="bi bi-building-fill-check text-primary"></i> CoSpace
-                </h4>
-              </a>
-              <p class="brand-description text-secondary">Crafting exceptional digital experiences through
-                thoughtful design and innovative solutions that elevate your brand presence.</p>
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@cospace.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Company</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2">
-                      <a href="about.html">Our Story</a>
-                      <a href="#">Design Process</a>
-                      <a href="#">Portfolio</a>
-                      <a href="#">Case Studies</a>
-                      <a href="#">Awards</a>
-                    </nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2">
-                      <a href="#">Hot Desks</a>
-                      <a href="#">Private Offices</a>
-                      <a href="#">Meeting Rooms</a>
-                      <a href="#">Event Spaces</a>
-                      <a href="#">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2">
-                      <a href="#">Community Blog</a>
-                      <a href="#">Workspace Guide</a>
-                      <a href="#">Free Assets</a>
-                      <a href="#">Tutorials</a>
-                      <a href="#">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2">
-                      <a href="#">Start Project</a>
-                      <a href="#">Schedule Call</a>
-                      <a href="#">Join Newsletter</a>
-                      <a href="#">Follow Updates</a>
-                      <a href="#">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
-            <div class="col-lg-6 text-center text-lg-start">
-              <div class="copyright">
-                <p>© 2026 <span class="sitename">Co-working Booking Platform</span>. All rights
-                  reserved.</p>
-              </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-end mt-3 mt-lg-0">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- Scroll Top -->
   <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i

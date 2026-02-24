@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Service Details - Private Offices</title>
+    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+    <meta name="description" content="Detailed information about our Private Office spaces.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --font-default: 'Inter', sans-serif;
+            --color-primary: #3f51b5;
+            --color-secondary: #ff6b6b;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --transition: all 0.3s ease-in-out;
+            --nav-bg-color: white;
+            --border-color: #e5e7eb;
+            --header-height: 80px;
+        }
+
+        [data-bs-theme="dark"] {
+            --nav-bg-color: #0f172a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --bg-light: #0f172a;
+            --bg-white: #1e293b;
+            --color-primary: #6366f1;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: var(--font-default);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-default);
+            font-weight: 700;
+        }
+
+        /* =========================================
+           NAVBAR
+    ========================================= */
+        .navbar-custom {
+            background: var(--nav-bg-color);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="dark"] .navbar-custom {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid #334155;
+        }
+
+        .navbar-custom.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        [data-bs-theme="dark"] .navbar-custom.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-main) !important;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-control:hover {
+            background: var(--primary-color);
+            color: white !important;
+            border-color: var(--primary-color);
+        }
+
+        .btn-nav-cta {
+            background: var(--primary-color);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown */
+        .dropdown-menu {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            margin-top: 10px !important;
+        }
+
+        .dropdown-item {
+            padding: 8px 20px;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* =========================================
+           PAGE TITLE
+    ========================================= */
+        .page-title {
+            background: linear-gradient(rgba(63, 81, 181, 0.9), rgba(63, 81, 181, 0.9)), url('https://picsum.photos/seed/service-office/1920/600') center center;
+            background-size: cover;
+            padding: 160px 0 80px 0;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: #fff;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* =========================================
+           SECTION STYLES
+    ========================================= */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+
+        /* Intro Section */
+        .service-intro-img {
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .feature-list i {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        /* Amenities Grid */
+        .amenity-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            height: 100%;
+        }
+
+        .amenity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-color);
+        }
+
+        .amenity-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+            transition: 0.3s;
+        }
+
+        .amenity-card:hover .amenity-icon {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Pricing Cards */
+        .pricing-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card .popular-tag {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .pricing-body li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .pricing-body li i {
+            color: #22c55e;
+            margin-right: 10px;
+        }
+
+        .pricing-body li i.bi-x {
+            color: #ef4444;
+        }
+
+        /* Gallery */
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: rgba(59, 130, 246, 0.2);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .client-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg-light);
+        }
+
+        /* FAQ */
+        .accordion-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px !important;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background-color: transparent;
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 20px 25px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(59, 130, 246, 0.05);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            padding: 0 25px 20px;
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--primary-dark));
+            color: white;
+            border-radius: 20px;
+            padding: 80px 40px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* =========================================
+           NEW FOOTER DESIGN
+        ========================================= */
+        .footer-new {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .footer-top {
+            background-color: var(--primary-color);
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .footer-top h3 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .footer-top p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .newsletter-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 5px;
+            max-width: 500px;
+            margin-left: auto;
+        }
+
+        .newsletter-form input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            flex-grow: 1;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .newsletter-form button {
+            background: #fff;
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #f1f5f9;
+            transform: scale(1.02);
+        }
+
+        .footer-main {
+            padding: 80px 0 40px;
+        }
+
+        .footer-logo {
+            height: 45px;
+            filter: brightness(0) invert(1);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #cbd5e1;
+            margin-right: 8px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            /* margin-right: 8px; */
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            /* padding-left: 5px; */
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+        }
+
+        .footer-contact li {
+            display: flex;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .footer-contact i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            background: #0a1120;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .copyright-text {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .copyright-text a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .copyright-text a:hover {
+            color: #fff;
+        }
+
+        .payment-icons img {
+            height: 30px;
+            margin-left: 10px;
+            filter: grayscale(100%) brightness(1.2);
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .payment-icons img:hover {
+            filter: none;
+            opacity: 1;
+        }
+
+        .scroll-top {
+            position: fixed;
+            visibility: hidden;
+            opacity: 0;
+            right: 15px;
+            bottom: -15px;
+            z-index: 99999;
+            background-color: var(--color-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.4s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top.active {
+            visibility: visible;
+            opacity: 1;
+            bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                padding: 120px 0 60px 0;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="service-details-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="Dashboard/assets/images/logo.png" alt="Logo"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span
+                    style="display:none; font-weight: 800; font-size: 1.5rem; color: var(--primary-color);">CoWork</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-2" style="color: var(--text-color);"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button"
+                            data-bs-toggle="dropdown">Home</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                            <li><a class="dropdown-item" href="index_2.html">Home 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                </ul>
+
+                <div class="nav-controls mt-3 mt-lg-0">
+                    <button class="btn-control" onclick="toggleRTL()" title="Switch RTL/LTR"><i
+                            class="bi bi-textarea-t"></i></button>
+                    <button class="btn-control" onclick="myFunction()" title="Switch Theme"><i
+                            class="bi bi-moon-stars-fill" id="theme-icon"></i></button>
+                    <div class="dropdown">
+                        <a href="#" class="btn-control dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="bi bi-grid-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="dashboard.html">Dashboard 1</a></li>
+                            <li><a class="dropdown-item" href="dashboard_2.html">Dashboard 2</a></li>
+                        </ul>
+                    </div>
+                    <!-- <a href="#" class="btn-nav-cta d-none d-lg-inline-block">Book Space</a> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-title">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <nav aria-label="breadcrumb" data-aos="fade-down">
+                            <ol class="breadcrumb justify-content-center mb-3">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="services.html">Services</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Private Office</li>
+                            </ol>
+                        </nav>
+                        <h1 data-aos="fade-up">Private Office Space</h1>
+                        <p class="lead opacity-75" data-aos="fade-up" data-aos-delay="100">Secure, productive, and fully
+                            serviced offices for teams of 2 to 50+.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: SERVICE INTRO -->
+        <section id="intro" class="intro-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                        <img src="https://picsum.photos/seed/private_office_intro/700/500" alt="Private Office"
+                            class="img-fluid service-intro-img">
+                    </div>
+                    <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+                        <span class="badge rounded-pill bg-primary-subtle text-primary mb-3 p-2">Premium
+                            Workspace</span>
+                        <h2 class="mb-4">Focus On Your Business, We Handle The Rest</h2>
+                        <p class="lead text-muted mb-4">Our private offices provide the perfect sanctuary for your team
+                            to collaborate and grow without the distractions of a shared environment.</p>
+                        <ul class="list-unstyled feature-list">
+                            <li><i class="bi bi-lock-fill"></i> <span>24/7 Keycard Access & Security</span></li>
+                            <li><i class="bi bi-wifi"></i> <span>Dedicated High-Speed Fiber Internet</span></li>
+                            <li><i class="bi bi-calendar-check"></i> <span>Flexible Lease Terms (Month-to-Month)</span>
+                            </li>
+                            <li><i class="bi bi-cup-hot"></i> <span>Complimentary Tea & Coffee Bar</span></li>
+                        </ul>
+                        <a href="#pricing" class="btn btn-primary btn-lg rounded-pill mt-3 px-5">View Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AMENITIES -->
+        <section id="amenities" class="amenities-section bg-light-subtle" style="background-color: var(--bg-white);">
+            <div class="container">
+                <div class="section-title text-center" data-aos="fade-up">
+                    <h2>Included Amenities</h2>
+                    <p>Everything you need to run your business is included in one transparent price.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="amenity-card">
+                            <div class="amenity-icon"><i class="bi bi-display"></i></div>
+                            <h5>Standing Desks</h5>
+                            <p class="text-muted small mb-0">Ergonomic furniture standard in all suites.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="amenity-card">
+                            <div class="amenity-icon"><i class="bi bi-printer"></i></div>
+                            <h5>Business Print</h5>
+                            <p class="text-muted small mb-0">Access to enterprise printers and scanners.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="amenity-card">
+                            <div class="amenity-icon"><i class="bi bi-telephone-inbound"></i></div>
+                            <h5>Phone Booths</h5>
+                            <p class="text-muted small mb-0">Private pods for calls and video chats.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="amenity-card">
+                            <div class="amenity-icon"><i class="bi bi-truck"></i></div>
+                            <h5>Mail Handling</h5>
+                            <p class="text-muted small mb-0">Professional mail receipt and forwarding.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRICING -->
+        <section id="pricing" class="pricing-section">
+            <div class="container">
+                <div class="section-title text-center" data-aos="fade-up">
+                    <h2>Choose Your Plan</h2>
+                    <p>Flexible configurations for teams of every size.</p>
+                </div>
+                <div class="row g-4 justify-content-center align-items-stretch">
+                    <!-- Plan 1 -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="pricing-card h-100">
+                            <h5 class="text-muted text-uppercase mb-2">Starter</h5>
+                            <h3>1-3 People</h3>
+                            <div class="price mt-3">$599<span>/mo</span></div>
+                            <div class="pricing-body">
+                                <ul>
+                                    <li><i class="bi bi-check-circle-fill"></i> 150 sq ft Office</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> High-Speed Wifi</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> 2 hrs Meeting Room</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Mail Handling</li>
+                                    <li class="text-decoration-line-through"><i class="bi bi-x-circle"></i> Dedicated
+                                        Storage</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="#" class="btn btn-outline-primary rounded-pill w-100">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plan 2 Featured -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="pricing-card featured h-100">
+                            <span class="popular-tag">Most Popular</span>
+                            <h5 class="text-primary text-uppercase mb-2">Growth</h5>
+                            <h3>4-8 People</h3>
+                            <div class="price mt-3">$1299<span>/mo</span></div>
+                            <div class="pricing-body">
+                                <ul>
+                                    <li><i class="bi bi-check-circle-fill"></i> 350 sq ft Suite</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Dedicated Fiber Line</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> 8 hrs Meeting Room</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Mail + Package Handling</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Storage Locker</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="#" class="btn btn-primary rounded-pill w-100">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plan 3 -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="pricing-card h-100">
+                            <h5 class="text-muted text-uppercase mb-2">Enterprise</h5>
+                            <h3>10+ People</h3>
+                            <div class="price mt-3">Custom</div>
+                            <div class="pricing-body">
+                                <ul>
+                                    <li><i class="bi bi-check-circle-fill"></i> Custom Build-out</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Private Network</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Unlimited Meeting Rooms</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Dedicated Receptionist</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Custom Security</li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="#" class="btn btn-outline-primary rounded-pill w-100">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GALLERY -->
+        <section id="gallery" class="gallery-section bg-light-subtle" style="background-color: var(--bg-white);">
+            <div class="container">
+                <div class="section-title text-center" data-aos="fade-up">
+                    <h2>Space Gallery</h2>
+                    <p>Take a virtual tour of our private office configurations.</p>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="gallery-item" style="height: 300px;">
+                            <img src="https://picsum.photos/seed/office_gal1/800/600" alt="Office View">
+                        </div>
+                    </div>
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                        <div class="gallery-item" style="height: 300px;">
+                            <img src="https://picsum.photos/seed/office_gal2/400/600" alt="Meeting Room">
+                        </div>
+                    </div>
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                        <div class="gallery-item" style="height: 300px;">
+                            <img src="https://picsum.photos/seed/office_gal3/400/600" alt="Lounge">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TESTIMONIALS -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="container">
+                <div class="section-title text-center" data-aos="fade-up">
+                    <h2>What Our Clients Say</h2>
+                    <p>Trusted by fast-moving companies worldwide.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="testimonial-card position-relative">
+                            <i class="bi bi-quote quote-icon"></i>
+                            <p class="mb-4 fst-italic">"Moving into a private office here was the best decision for our
+                                startup. The lease flexibility allowed us to scale up quickly without being tied down."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/seed/user1/100/100" alt="User" class="client-img me-3">
+                                <div>
+                                    <h6 class="mb-0">Sarah Mitchell</h6>
+                                    <small class="text-muted">CEO, TechFlow Inc.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card position-relative">
+                            <i class="bi bi-quote quote-icon"></i>
+                            <p class="mb-4 fst-italic">"The amenities are top-notch. Having access to meeting rooms and
+                                high-speed internet without extra costs saved us thousands in overhead."</p>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/seed/user2/100/100" alt="User" class="client-img me-3">
+                                <div>
+                                    <h6 class="mb-0">David Chen</h6>
+                                    <small class="text-muted">Founder, DesignHub</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: FAQ -->
+        <section id="faq" class="faq-section bg-light-subtle" style="background-color: var(--bg-white);">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-title text-center" data-aos="fade-up">
+                            <h2>Frequently Asked Questions</h2>
+                        </div>
+                        <div class="accordion" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq1">
+                                        What is the minimum lease term?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        We offer flexible month-to-month agreements, though we also provide discounted
+                                        rates for 6-month and 12-month commitments.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq2">
+                                        Can I customize the office layout?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Yes, for our Enterprise plans, we offer custom build-outs. For smaller plans,
+                                        you can arrange furniture to your liking.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq3">
+                                        Are pets allowed in private offices?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Yes! We are a pet-friendly workspace. We only ask that pets are well-behaved and
+                                        do not disturb other members in common areas.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / BOOKING FORM -->
+        <section class="container">
+            <div class="cta-section text-center" data-aos="fade-up">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="mb-3">Ready to Move In?</h2>
+                        <p class="mb-5 opacity-75">Schedule a tour today and see why hundreds of companies call CoWork
+                            home.</p>
+                        <form class="row g-3 justify-content-center">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" class="form-control" placeholder="Email Address">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-light w-100 py-3 fw-bold text-primary">Book
+                                    Tour</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================
+         NEW FOOTER DESIGN
+    ========================================= -->
+    <footer class="footer-new">
+        <!-- Top Newsletter Section -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                        <h3>Subscribe to Our Newsletter</h3>
+                        <p>Get the latest updates on new spaces and exclusive offers.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email address">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <!-- Column 1: Brand -->
+                    <div class="col-lg-4 col-md-6 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                        <div class="footer-brand">
+                            <img src="Dashboard/assets/images/logo.png" alt="Logo" class="footer-logo"
+                                onerror="this.style.display='none'">
+                            <!-- <h3 style="color:#fff; margin-bottom: 20px; font-weight: 800;">CoWork Space</h3> -->
+                            <p>Innovative coworking spaces designed for productivity, creativity, and collaboration.
+                                Join a community of like-minded professionals.</p>
+                            <div class="social-icons">
+                                <a href="#"><i class="bi bi-facebook"></i></a>
+                                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#"><i class="bi bi-instagram"></i></a>
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Quick Links -->
+                    <div class="col-6 col-lg-2 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                        <h5 class="footer-title">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="blog.html">Blog & News</a></li>
+                            <li><a href="contact.html"> Contact</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Spaces -->
+                    <div class="col-6 col-lg-2 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+                        <h5 class="footer-title">Our Spaces</h5>
+                        <ul class="footer-links">
+                            <li><a href="#"> Hot Desks</a></li>
+                            <li><a href="#"> Private Offices</a></li>
+                            <li><a href="#"> Meeting Rooms</a></li>
+                            <li><a href="#"> Event Spaces</a></li>
+                            <li><a href="#"> Virtual Office</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Contact Info -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <h5 class="footer-title">Contact Info</h5>
+                        <ul class="list-unstyled footer-contact">
+                            <li>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>123 Business Avenue, Suite 500<br>New York, NY 10012</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill"></i>
+                                <span>+1 (555) 123-4567<br>+1 (555) 987-6543</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock-fill"></i>
+                                <span>Mon - Friday: 08:00 - 20:00<br>Sat - Sun: 10:00 - 16:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="copyright-text">
+                            © 2026 <a href="#">CoWork Space</a>. All Rights Reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="text-muted me-3 text-decoration-none">Privacy Policy</a>
+                        <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Init AOS
+            AOS.init({ duration: 800, once: true });
+
+            // Theme Logic
+            const htmlElement = document.documentElement;
+            function applyTheme(theme) {
+                htmlElement.setAttribute('data-bs-theme', theme);
+                localStorage.setItem('theme', theme);
+                const icon = document.querySelector('#theme-icon');
+                if (icon) {
+                    icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+                }
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            window.myFunction = () => {
+                const newTheme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            };
+
+            window.toggleRTL = () => {
+                const html = document.documentElement;
+                html.setAttribute('dir', html.getAttribute('dir') === 'ltr' ? 'rtl' : 'ltr');
+            };
+
+            // Scroll Top
+            const scrollTop = document.querySelector('.scroll-top');
+            window.addEventListener('scroll', () => {
+                scrollTop.classList.toggle('active', window.scrollY > 100);
+            });
+            scrollTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            // Navbar Scroll
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+        });
+    </script>
+</body>
+
+</html>

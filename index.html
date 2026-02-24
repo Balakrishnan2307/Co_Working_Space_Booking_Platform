@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Co_Working_Space_Booking_Platform</title>
-    <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="Dashboard/assets/images/logo.png" type="image/x-icon">
   <meta name="description" content="Modern Co-working Space Booking Platform">
 
   <!-- Fonts -->
@@ -160,6 +160,29 @@
       transform: translateY(-2px);
     }
 
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      margin-top: 10px !important;
+    }
+
+    .dropdown-item {
+      padding: 8px 20px;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+      background-color: var(--bg-light);
+      color: var(--primary-color);
+    }
+
     /* =========================================
            SECTIONS GENERAL
         ========================================= */
@@ -178,7 +201,7 @@
     }
 
     /* =========================================
-           HERO SECTION
+           HERO SECTION (UPDATED CENTERING)
         ========================================= */
     .hero {
       padding-top: var(--header-height);
@@ -200,6 +223,9 @@
       position: relative;
       z-index: 2;
       color: white;
+      /* UPDATED: Center alignment */
+      text-align: center;
+      width: 100%;
     }
 
     .hero h1 {
@@ -213,7 +239,10 @@
       font-size: 1.25rem;
       opacity: 0.9;
       margin-bottom: 30px;
-      max-width: 600px;
+      max-width: 700px;
+      /* UPDATED: Center block */
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* =========================================
@@ -307,61 +336,221 @@
     }
 
     /* =========================================
-           FOOTER
+           NEW FOOTER DESIGN
         ========================================= */
-    /* --- Footer --- */
-    .footer {
+    .footer-new {
       background-color: #0f172a;
-      color: #fff;
-      padding: 60px 0 20px;
-      font-size: 0.9rem;
+      color: #cbd5e1;
+      font-size: 0.95rem;
     }
 
-    .footer a {
-      color: #adb5bd;
-      text-decoration: none;
+    .footer-top {
+      background-color: var(--primary-color);
+      padding: 50px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-top::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .footer-top h3 {
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .footer-top p {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    .newsletter-form {
+      display: flex;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      padding: 5px;
+      max-width: 500px;
+      margin-left: auto;
+    }
+
+    .newsletter-form input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      flex-grow: 1;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .newsletter-form button {
+      background: #fff;
+      color: var(--primary-color);
+      border: none;
+      padding: 10px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
       transition: 0.3s;
     }
 
-    .footer a:hover {
-      color: #fff;
-      padding-left: 5px;
+    .newsletter-form button:hover {
+      background: #f1f5f9;
+      transform: scale(1.02);
     }
 
-    .footer h6 {
-      color: #fff;
+    .footer-main {
+      padding: 80px 0 40px;
+    }
+
+    .footer-logo {
+      height: 45px;
+      filter: brightness(0) invert(1);
       margin-bottom: 20px;
-      font-weight: 600;
     }
 
-    .footer .contact-item {
+    .footer-brand p {
+      color: #94a3b8;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .social-icons a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #cbd5e1;
+      margin-right: 8px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .footer-title {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--primary-color);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: 0.3s;
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
-      color: #adb5bd;
     }
 
-    .footer .contact-item i {
-      margin-right: 10px;
-      color: var(--color-primary);
+    .footer-links a i {
+      /* margin-right: 8px; */
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      /* padding-left: 5px; */
+    }
+
+    .footer-links a:hover i {
+      opacity: 1;
+    }
+
+    .footer-contact li {
+      display: flex;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-right: 15px;
+      margin-top: 3px;
     }
 
     .footer-bottom {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #6c757d;
+      background: #0a1120;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .footer-bottom a {
-      color: #6c757d;
-      margin-left: 20px;
+    .copyright-text {
+      color: #64748b;
+      margin: 0;
     }
 
-    /* Helpers */
-    .text-custom-muted {
-      color: var(--text-muted) !important;
+    .copyright-text a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
     }
+
+    .copyright-text a:hover {
+      color: #fff;
+    }
+
+    .payment-icons img {
+      height: 30px;
+      margin-left: 10px;
+      filter: grayscale(100%) brightness(1.2);
+      opacity: 0.7;
+      transition: 0.3s;
+    }
+
+    .payment-icons img:hover {
+      filter: none;
+      opacity: 1;
+    }
+
 
     /* Scroll Top */
     .scroll-top {
@@ -412,8 +601,19 @@
       <!-- Nav Items -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="index_2.html">Home 2</a></li>
+
+          <!-- UPDATED: Home Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="homeDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+              <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+              <li><a class="dropdown-item active" href="index_2.html">Home 2</a></li>
+            </ul>
+          </li>
+
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
@@ -445,7 +645,7 @@
           </div>
 
           <!-- CTA -->
-          <a href="#" class="btn-nav-cta d-none d-lg-inline-block">Book Space</a>
+          <!-- <a href="#" class="btn-nav-cta d-none d-lg-inline-block" style="text-decoration: none;">Book Space</a> -->
         </div>
       </div>
     </div>
@@ -454,8 +654,9 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-7" data-aos="fade-right">
+        <div class="row align-items-center justify-content-center">
+          <!-- UPDATED: Changed col-lg-7 to col-lg-10 mx-auto for centering -->
+          <div class="col-lg-10 mx-auto" data-aos="fade-right">
             <div class="hero-content">
               <span class="badge rounded-pill bg-light text-dark mb-3 px-3 py-2">🚀 The Future of Work is
                 Here</span>
@@ -463,12 +664,12 @@
               <p>Connect with innovative minds in our state-of-the-art co-working spaces. Flexible plans,
                 high-speed internet, and a community that grows with you.</p>
 
-              <div class="d-flex gap-3 mt-4">
+              <div class="d-flex gap-3 mt-4 justify-content-center">
                 <a href="#services" class="btn btn-primary btn-lg rounded-pill px-4">Explore Spaces</a>
                 <a href="#about" class="btn btn-outline-light btn-lg rounded-pill px-4">Learn More</a>
               </div>
 
-              <div class="d-flex gap-4 mt-5">
+              <div class="d-flex gap-4 mt-5 justify-content-center">
                 <div>
                   <h3 class="fw-bold mb-0">15k+</h3>
                   <small class="opacity-75">Members</small>
@@ -642,82 +843,112 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer id="footer" class="footer position-relative">
-    <div class="container">
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
-          <div class="col-lg-5 mb-5 mb-lg-0">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <img src="Dashboard/assets/images/logo.png" width="150px" alt="">
-              </a>
-              <p class="brand-description text-secondary">Crafting exceptional digital experiences through
-                thoughtful design and innovative solutions.</p>
-              <div class="contact-info mt-5">
-                <div class="contact-item"><i class="bi bi-geo-alt"></i><span>123 Creative Boulevard, NY
-                    10012</span></div>
-                <div class="contact-item"><i class="bi bi-telephone"></i><span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item"><i class="bi bi-envelope"></i><span>hello@cospace.com</span>
-                </div>
-              </div>
-            </div>
+  <!-- =========================================
+         NEW FOOTER DESIGN
+    ========================================= -->
+  <footer class="footer-new">
+    <!-- Top Newsletter Section -->
+    <div class="footer-top">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+            <h3>Subscribe to Our Newsletter</h3>
+            <p>Get the latest updates on new spaces and exclusive offers.</p>
           </div>
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Company</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2"><a href="about.html">Our
-                        Story</a><a href="#">Design Process</a><a href="#">Portfolio</a></nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2"><a href="#">Hot Desks</a><a href="#">Private
-                        Offices</a></nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2"><a href="#">Blog</a><a href="#">Guide</a></nav>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-4">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav d-flex flex-column gap-2"><a href="#">Start Project</a><a
-                        href="#">Contact</a></nav>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email address">
+              <button type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+
+    <!-- Main Footer Content -->
+    <div class="footer-main">
       <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
-            <div class="col-lg-6 text-center text-lg-start">
-              <div class="copyright">
-                <p>© 2026 <span class="sitename">Co-Working Booking Platform</span>. All rights reserved.</p>
+        <div class="row">
+          <!-- Column 1: Brand -->
+          <div class="col-lg-4 col-md-6 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <div class="footer-brand">
+              <img src="Dashboard/assets/images/logo.png" alt="Logo" class="footer-logo"
+                onerror="this.style.display='none'">
+              <!-- <h3 style="color:#fff; margin-bottom: 20px; font-weight: 800;">CoWork Space</h3> -->
+              <p>Innovative coworking spaces designed for productivity, creativity, and collaboration.
+                Join a community of like-minded professionals.</p>
+              <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
-            <div class="col-lg-6 text-center text-lg-end mt-3 mt-lg-0">
-              <div class="legal-links"><a href="#!">Privacy Policy</a><a href="#!">Terms</a></div>
-            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="col-6 col-lg-2 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+            <h5 class="footer-title">Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="blog.html">Blog & News</a></li>
+              <li><a href="contact.html"> Contact</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Spaces -->
+          <div class="col-6 col-lg-2 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <h5 class="footer-title">Our Spaces</h5>
+            <ul class="footer-links">
+              <li><a href="#"> Hot Desks</a></li>
+              <li><a href="#"> Private Offices</a></li>
+              <li><a href="#"> Meeting Rooms</a></li>
+              <li><a href="#"> Event Spaces</a></li>
+              <li><a href="#"> Virtual Office</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <h5 class="footer-title">Contact Info</h5>
+            <ul class="list-unstyled footer-contact">
+              <li>
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>123 Business Avenue, Suite 500<br>New York, NY 10012</span>
+              </li>
+              <li>
+                <i class="bi bi-telephone-fill"></i>
+                <span>+1 (555) 123-4567<br>+1 (555) 987-6543</span>
+              </li>
+              <li>
+                <i class="bi bi-clock-fill"></i>
+                <span>Mon - Friday: 08:00 - 20:00<br>Sat - Sun: 10:00 - 16:00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Footer -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <p class="copyright-text">
+              © 2026 <a href="#">CoWork Space</a>. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <a href="#" class="text-muted me-3 text-decoration-none">Privacy Policy</a>
+            <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
           </div>
         </div>
       </div>
     </div>
   </footer>
-
   <!-- Scroll Top Button -->
   <div class="scroll-top" id="scrollTop">
     <i class="bi bi-arrow-up"></i>

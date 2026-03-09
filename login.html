@@ -20,7 +20,6 @@
     <style>
         :root {
             --primary-color: #1089ff;
-            /* Requested Color */
             --primary-hover: #0d74d6;
             --text-color: #333;
             --bg-color: #f4f7f6;
@@ -35,6 +34,8 @@
             align-items: center;
             justify-content: center;
             color: var(--text-color);
+            padding: 20px 0;
+            /* Added padding for better spacing on mobile */
         }
 
         /* Logo Section */
@@ -47,6 +48,8 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            /* Ensure content inside link is centered */
             gap: 10px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -108,6 +111,30 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(16, 137, 255, 0.15);
         }
+
+        /* Fix for Input Groups to ensure they align nicely */
+        .input-group-text {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-right: 0;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .input-group .form-control {
+            border-left: 0;
+            border-radius: 0 8px 8px 0;
+            background-color: #f9f9f9;
+        }
+
+        .input-group .form-control:focus {
+            border-left: 0;
+        }
+
+        .input-group:focus-within .input-group-text {
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
 
         /* Primary Button */
         .btn-primary-custom {
@@ -177,22 +204,26 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
+        /* Responsive - FIXED BUG HERE */
         @media (max-width: 576px) {
+            body {
+                /* Removed align-items: flex-start to keep content centered */
+                justify-content: flex-start;
+                /* Start content from top on small scrollable screens */
+                padding-top: 40px;
+            }
+
             .auth-card {
                 padding: 20px;
                 box-shadow: none;
-                background: transparent;
-            }
-
-            body {
-                align-items: flex-start;
-                padding-top: 20px;
+                /* Kept background white for readability, removed 'transparent' which can look broken */
+                background: #fff;
+                border-radius: 15px;
+                margin-bottom: 20px;
             }
 
             .auth-logo {
                 margin-bottom: 30px;
-                margin-top: 20px;
             }
         }
     </style>
@@ -203,8 +234,8 @@
     <!-- Top Center Logo (Linked to Home) -->
     <div class="auth-logo mb-4">
         <a href="index.html">
-
-            <img src="Dashboard/assets/images/logo.png" width="200px" alt="">
+            <!-- Note: Ensure the image path is correct relative to this file -->
+            <img src="Dashboard/assets/images/logo.png" width="200px" alt="Logo">
         </a>
     </div>
 
@@ -235,10 +266,8 @@
                         <div class="mb-4">
                             <label for="loginEmail" class="form-label text-muted small fw-bold">EMAIL ADDRESS</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-envelope text-muted"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="loginEmail"
-                                    placeholder="name@example.com">
+                                <span class="input-group-text"><i class="bi bi-envelope text-muted"></i></span>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
                             </div>
                         </div>
                         <div class="mb-4">
@@ -248,10 +277,8 @@
                                 <a href="#" class="text-link small">Forgot Password?</a>
                             </div>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-lock text-muted"></i></span>
-                                <input type="password" class="form-control border-start-0 ps-0" id="loginPassword"
-                                    placeholder="••••••••">
+                                <span class="input-group-text"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
                             </div>
                         </div>
 
@@ -275,10 +302,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="firstName" class="form-label text-muted small fw-bold">FIRST NAME</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0"><i
-                                            class="bi bi-person text-muted"></i></span>
-                                    <input type="text" class="form-control border-start-0 ps-0" id="firstName"
-                                        placeholder="John">
+                                    <span class="input-group-text"><i class="bi bi-person text-muted"></i></span>
+                                    <input type="text" class="form-control" id="firstName" placeholder="John">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -290,9 +315,8 @@
                         <div class="mb-3">
                             <label for="signupEmail" class="form-label text-muted small fw-bold">EMAIL ADDRESS</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-envelope text-muted"></i></span>
-                                <input type="email" class="form-control border-start-0 ps-0" id="signupEmail"
+                                <span class="input-group-text"><i class="bi bi-envelope text-muted"></i></span>
+                                <input type="email" class="form-control" id="signupEmail"
                                     placeholder="name@example.com">
                             </div>
                         </div>
@@ -300,9 +324,8 @@
                         <div class="mb-4">
                             <label for="signupPassword" class="form-label text-muted small fw-bold">PASSWORD</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-lock text-muted"></i></span>
-                                <input type="password" class="form-control border-start-0 ps-0" id="signupPassword"
+                                <span class="input-group-text"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" class="form-control" id="signupPassword"
                                     placeholder="Create a password">
                             </div>
                         </div>

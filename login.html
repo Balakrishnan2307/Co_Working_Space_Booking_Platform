@@ -35,7 +35,6 @@
             justify-content: center;
             color: var(--text-color);
             padding: 20px 0;
-            /* Added padding for better spacing on mobile */
         }
 
         /* Logo Section */
@@ -49,7 +48,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            /* Ensure content inside link is centered */
             gap: 10px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -112,7 +110,7 @@
             box-shadow: 0 0 0 0.2rem rgba(16, 137, 255, 0.15);
         }
 
-        /* Fix for Input Groups to ensure they align nicely */
+        /* Fix for Input Groups */
         .input-group-text {
             background-color: #f9f9f9;
             border: 1px solid #e0e0e0;
@@ -204,19 +202,16 @@
             text-decoration: underline;
         }
 
-        /* Responsive - FIXED BUG HERE */
+        /* Responsive */
         @media (max-width: 576px) {
             body {
-                /* Removed align-items: flex-start to keep content centered */
                 justify-content: flex-start;
-                /* Start content from top on small scrollable screens */
                 padding-top: 40px;
             }
 
             .auth-card {
                 padding: 20px;
                 box-shadow: none;
-                /* Kept background white for readability, removed 'transparent' which can look broken */
                 background: #fff;
                 border-radius: 15px;
                 margin-bottom: 20px;
@@ -234,7 +229,6 @@
     <!-- Top Center Logo (Linked to Home) -->
     <div class="auth-logo mb-4">
         <a href="index.html">
-            <!-- Note: Ensure the image path is correct relative to this file -->
             <img src="Dashboard/assets/images/logo.png" width="200px" alt="Logo">
         </a>
     </div>
@@ -270,15 +264,17 @@
                                 <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
                             </div>
                         </div>
+
+                        <!-- Password Field Section -->
                         <div class="mb-4">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <label for="loginPassword"
-                                    class="form-label text-muted small fw-bold mb-0">PASSWORD</label>
-                                <a href="#" class="text-link small">Forgot Password?</a>
-                            </div>
+                            <label for="loginPassword" class="form-label text-muted small fw-bold">PASSWORD</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock text-muted"></i></span>
                                 <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
+                            </div>
+                            <!-- Moved Forgot Password Link Here -->
+                            <div class="text-end mt-2">
+                                <a href="#" class="text-link small">Forgot Password?</a>
                             </div>
                         </div>
 
